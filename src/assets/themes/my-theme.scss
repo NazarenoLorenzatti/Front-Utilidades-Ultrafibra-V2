@@ -1,0 +1,121 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$primary-palette: (
+    50 : #e3e4e7,
+    100 : #b9bbc2,
+    200 : #8b8e9a,
+    300 : #5d6072,
+    400 : #3a3e53,
+    500 : #171c35,
+    600 : #141930,
+    700 : #111428,
+    800 : #0d1122,
+    900 : #070916,
+    A100 : #586aff,
+    A200 : #253dff,
+    A400 : #001bf1,
+    A700 : #0018d7,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #ffffff,
+        A200 : #ffffff,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$accent-palette: (
+    50 : #e6ffee,
+    100 : #c2fed5,
+    200 : #99feb9,
+    300 : #70fe9d,
+    400 : #51fd88,
+    500 : #32fd73,
+    600 : #2dfd6b,
+    700 : #26fc60,
+    800 : #1ffc56,
+    900 : #13fc43,
+    A100 : #ffffff,
+    A200 : #f6fff8,
+    A400 : #c3ffce,
+    A700 : #aaffb9,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$warn-palette: (
+    50 : #fae5e5,
+    100 : #f3bdbd,
+    200 : #eb9191,
+    300 : #e36565,
+    400 : #dd4444,
+    500 : #d72323,
+    600 : #d31f1f,
+    700 : #cd1a1a,
+    800 : #c71515,
+    900 : #be0c0c,
+    A100 : #ffeaea,
+    A200 : #ffb7b7,
+    A400 : #ff8484,
+    A700 : #ff6a6a,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$my-primary: mat.define-palette($primary-palette);
+$my-accent: mat.define-palette($accent-palette);
+$my-warn: mat.define-palette($warn-palette);
+
+$custom-font: mat.define-typography-config(
+    $font-family: 'fuentePersonalizada',
+  );
+
+$my-theme: mat.define-light-theme((    
+color:(
+    primary: $my-primary,
+    accent: $my-accent,
+    warn: $my-warn,
+    ),
+typography: $custom-font,
+));
+
+@include mat.all-component-themes($my-theme);

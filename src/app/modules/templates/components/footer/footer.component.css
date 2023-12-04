@@ -1,0 +1,156 @@
+.section-footer {
+  position: relative;
+  background-color: #071426;
+  color: white;
+}
+
+.footer {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+
+.abstracto {
+  position: absolute;
+  width: 60%;
+  height: 120px;
+  background-color: #31fb745e;
+}
+
+.uno {
+  border-top-right-radius: 30px;
+  top: 0;
+  left: 0px;
+}
+
+.dos {
+  border-top-left-radius: 30px;
+  top: 50px;
+  right: 0px;
+}
+
+.copy {
+  position: absolute;
+  background-color: #071426;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  top: 100px;
+}
+
+.empresa,
+.redes,
+.logo-footer {
+  width: 33.3333%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-info {
+  display: flex;
+  height: 100%;
+  width: 35%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.container-redes {
+  display: flex;
+  width: 50%;
+  justify-content: space-around;
+}
+
+.imagen-footer {
+  width: 200px;
+  height: 65px;
+}
+
+.footer-foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  padding: 5px;
+  height: 50px;
+  width: 100%;
+  background-color: #222222;
+}
+
+@media screen and (max-width: 720px) {
+  .footer {
+    position: relative;
+    width: 100%;
+    height: 350px;
+  }
+
+
+  .uno {
+    border-top-right-radius: 30px;
+    top: 20px;
+    left: 0px;
+  }
+
+  .dos {
+    border-top-left-radius: 30px;
+    top: 50px;
+    right: 0px;
+  }
+
+  .copy {
+    position: absolute;
+    background-color: #071426;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 250px;
+    top: 100px;
+  }
+
+  .empresa {
+    padding-left: 15px;
+    width: 75%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .redes {
+    width: 25%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logo-footer {
+    width: 100%;
+    height: 30%;
+  }
+
+  .container-redes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .container-info {
+    width: 100%;
+  }
+
+  .footer-foot {
+   align-items: center;
+    flex-direction: column;
+    font-size: 12px;
+  }
+}

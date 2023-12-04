@@ -1,0 +1,46 @@
+.container {
+    width: 100%;
+    height: 100%;
+    background-color: #071426;
+}
+
+.buttons {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-left {
+    width: 100%;
+    height: 50%;
+    background-color: beige;
+}
+
+.container-rigth {
+    width: 100%;
+    height: 50%;
+    background-color: blue;
+}
+
+
+@media screen and (min-width: 720px) {
+
+    .buttons {
+        width: 100%;
+        height: 80%;
+        flex-direction: row;
+    }
+    
+    .container-left {
+        width: 50%;
+        height: 100%;
+        background-color: beige;
+    }
+
+    .container-rigth {
+        width: 100%;
+        height: 50%;
+        background-color: blue;
+    }
+}

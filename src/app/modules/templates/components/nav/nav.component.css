@@ -42,6 +42,7 @@ h1.app-nombre{
 }
 
 .sidenav-container{
+    background-color: #071426;
     flex: 1;
 }
 

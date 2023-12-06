@@ -5,13 +5,15 @@ import { HomeComponent } from './home/home.component';
 import { MaterialModule } from '../templates/material.module';
 import { NgPrimeModule } from '../templates/ng-prime.module';
 import { TemplateModule } from '../templates/template.module';
+import { HomebankingComponent } from './homebanking/homebanking.component';
 
 
 
 @NgModule({
   declarations: [
     AppCommonsComponent,
-    HomeComponent
+    HomeComponent,
+    HomebankingComponent
   ],
   imports: [
     CommonModule,

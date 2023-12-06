@@ -46,12 +46,14 @@ export class NavComponent implements OnInit{
   ]
 
   constructor(media : MediaMatcher){
-    this.pantallaCelu = media.matchMedia('(max-width: 720px)');    
+    this.pantallaCelu = media.matchMedia('(max-width: 865px)');    
   }
 
   ngOnInit(): void{
     if(!this.pantallaCelu.matches){
       this.sidenav.open();
+    } else {
+      this.sidenav.close();
     }
   }
   

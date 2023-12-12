@@ -1,0 +1,111 @@
+<div class="container">
+    <div class="tab-btns">
+        <p-selectButton [options]="stateOptions" (ngModel)="valueRdn" optionLabel="label"
+            optionValue="value"></p-selectButton>
+    </div>
+    <div class="container-tab">
+        <!--div class="tab-1">
+            <div class="input-file">
+                <p-toast></p-toast>
+                <p-fileUpload name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php"
+                    (onUpload)="onUpload($event)" [multiple]="true" accept="file/*" [maxFileSize]="1000000">
+                    <ng-template pTemplate="content">
+                        <ul *ngIf="uploadedFiles.length">
+                            <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+                        </ul>
+                    </ng-template>
+                </p-fileUpload>
+            </div>
+            <div class="table">
+                <div class="card">
+                    <p-table [value]="values" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+                        [tableStyle]="{ 'min-width': '20rem' }"
+                        currentPageReportTemplate="{first} to {last} of {totalRecords}"
+                        [rowsPerPageOptions]="[10, 25, 50]">
+                        <ng-template pTemplate="caption">
+                            <div class="calendar-group">
+                                <p-selectButton [options]="abiertosCerrados" (ngModel)="valueOpenClose" optionLabel="label"
+                                    optionValue="value"></p-selectButton>
+                                <p-calendar (ngModel)="date" [showIcon]="true"></p-calendar>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width:25%">Name</th>
+                                <th style="width:25%">Country</th>
+                                <th style="width:25%">Company</th>
+                                <th style="width:25%">Representative</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-customer>
+                            <tr>
+                                <td>{{ customer.name }}</td>
+                                <td>{{ customer.country.name }}</td>
+                                <td>{{ customer.company }}</td>
+                                <td>{{ customer.representative.name }}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+            <div class="inputs">
+                <div class="card-inpt">
+                    <span class="p-float-label">
+                        <input style="width:100%" pInputText id="namefile" (ngModel)="value" />
+                        <label htmlFor="namefile">Nombre del Archivo!</label>
+                    </span>
+                </div>
+                <p-button class="btn-dwn" label="Descargar Extracto" [loading]="loading" (onClick)="load()"></p-button>
+            </div>
+        </div-->
+
+        <div class="tab-2">
+            <div class="input-file">
+                <p-toast></p-toast>
+                <p-fileUpload name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php"
+                    (onUpload)="onUpload($event)" [multiple]="true" accept="file/*" [maxFileSize]="1000000">
+                    <ng-template pTemplate="content">
+                        <ul *ngIf="uploadedFiles.length">
+                            <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+                        </ul>
+                    </ng-template>
+                </p-fileUpload>
+            </div>
+            <div class="table">
+                <div class="card">
+                    <p-table [value]="values" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+                        [tableStyle]="{ 'min-width': '20rem' }"
+                        currentPageReportTemplate="{first} to {last} of {totalRecords}"
+                        [rowsPerPageOptions]="[10, 25, 50]">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width:25%">Name</th>
+                                <th style="width:25%">Country</th>
+                                <th style="width:25%">Company</th>
+                                <th style="width:25%">Representative</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-customer>
+                            <tr>
+                                <td>{{ customer.name }}</td>
+                                <td>{{ customer.country.name }}</td>
+                                <td>{{ customer.company }}</td>
+                                <td>{{ customer.representative.name }}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+            <div class="inputs">
+                <div class="card-inpt">
+                    <span class="p-float-label">
+                        <input style="width:100%" pInputText id="namefile" (ngModel)="value" />
+                        <label htmlFor="namefile">Nombre del Archivo!</label>
+                    </span>
+                </div>
+                <p-button class="btn-dwn" label="Descargar Respuesta" [loading]="loading" (onClick)="load()"></p-button>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

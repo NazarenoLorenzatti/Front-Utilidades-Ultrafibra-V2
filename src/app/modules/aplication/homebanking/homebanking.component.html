@@ -1,10 +1,55 @@
 <div class="container">
     <div class="container-functions">
         <div class="container-left">
-
+            <div class="inpt-file">
+                <div class="div-file">
+                    <p-toast></p-toast>
+                    <p-fileUpload name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php"
+                        (onUpload)="onUpload($event)" [multiple]="true" accept="file/*" [maxFileSize]="1000000">
+                        <ng-template pTemplate="content">
+                            <ul *ngIf="uploadedFiles.length">
+                                <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+                            </ul>
+                        </ng-template>
+                    </p-fileUpload>
+                </div>
+            </div>
+            <div class="inpt-text">
+                <div class="card-inpt">
+                    <span class="p-float-label">
+                        <input pInputText id="namefile" (ngModel)="value"/>
+                        <label htmlFor="namefile">Nombre del Archivo!</label>
+                    </span>
+                </div>
+            </div>
+            <div class="btns">
+                <p-button label="Cargar Archivo!" [raised]="true" severity="warning"></p-button>
+            </div>
         </div>
         <div class="container-right">
-
+            <div class="card">
+                <p-table #dt [columns]="cols" selectionMode="multiple" styleClass="p-datatable-striped" [exportHeader]="'customExportHeader'" [tableStyle]="{ 'min-width': '50rem' }">
+                    <ng-template pTemplate="caption">
+                        <div class="flex">
+                            <button label="Descargar Archivo!" type="button" pButton pRipple icon="pi pi-file-excel"  class="p-button mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th *ngFor="let col of columns">
+                                {{ col.header }}
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr [pSelectableRow]="rowData">
+                            <td *ngFor="let col of columns">
+                                {{ rowData[col.field] }}
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
         </div>
     </div>
     <app-footer></app-footer>

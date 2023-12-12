@@ -14,13 +14,50 @@
 .container-left {
     width: 100%;
     height: 50%;
-    background-color: beige;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    align-items: center;
 }
 
-.container-rigth {
-    width: 100%;
+.inpt-file{
+    display: flex;
     height: 50%;
-    background-color: blue;
+    width: 98%;
+    background-color: #222222;
+    margin: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.inpt-text{
+    display: flex;
+    justify-content: center;
+    height: 15%;
+    width: 98%;
+}
+
+.card-inpt{
+    display: block;
+    width: 90%;
+}
+
+#username{
+    width: 100%;
+}
+
+.btns{
+    display: flex;
+    height: 15%;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-right {
+    width: 100%;
+    padding: 50px;
+    height: 50%;
 }
 
 
@@ -35,12 +72,14 @@
     .container-left {
         width: 50%;
         height: 100%;
-        background-color: beige;
     }
 
-    .container-rigth {
-        width: 100%;
-        height: 50%;
-        background-color: blue;
+    .container-right {
+        width: 50%;
+        height: 100%;
+    }
+
+    .card-inpt{
+        width: 40%;
     }
 }

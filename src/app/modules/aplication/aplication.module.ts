@@ -6,6 +6,9 @@ import { MaterialModule } from '../templates/material.module';
 import { NgPrimeModule } from '../templates/ng-prime.module';
 import { TemplateModule } from '../templates/template.module';
 import { HomebankingComponent } from './homebanking/homebanking.component';
+import { DebitsComponent } from './debits/debits.component';
+import { SnmpMonitorComponent } from './snmp-monitor/snmp-monitor.component';
+import { EventsComponent } from './events/events.component';
 
 
 
@@ -13,7 +16,10 @@ import { HomebankingComponent } from './homebanking/homebanking.component';
   declarations: [
     AppCommonsComponent,
     HomeComponent,
-    HomebankingComponent
+    HomebankingComponent,
+    DebitsComponent,
+    SnmpMonitorComponent,
+    EventsComponent
   ],
   imports: [
     CommonModule,

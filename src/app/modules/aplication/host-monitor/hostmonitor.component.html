@@ -1,0 +1,42 @@
+<div class="container">
+
+    <div class="card flex justify-content-center gap-2">
+        <p-toast></p-toast>
+        <!--<button type="button" pButton pRipple (click)="showSuccess()" label="Success" class="p-button-success"></button>
+        <button type="button" pButton pRipple (click)="showError()" label="Error" class="p-button-danger"></button> -->
+    </div>
+
+    <p-dialog header="Nuevo Host" [(visible)]="visible" [modal]="true" [style]="{ width: '30vw' }" [draggable]="false"
+        [resizable]="false">
+        <div class="modal">
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+                <div class="input-form">
+                    <label for="nombreHost">Nombre de Host:</label>
+                    <input id="nombreHost" type="text" aria-describedby="name-help" pInputText formControlName="nombreHost" />
+                    <small id="name-help">Ingrese el nombre del Host.</small>
+                </div>
+                <div class="input-form">
+                    <label for="ipHost">Ip Host:</label>
+                    <input id="ipHost" type="text" aria-describedby="ip-help" pInputText formControlName="ipHost" />
+                    <small id="ip-help">Ingrese la Ip a monitorear.</small>
+                </div>
+                <!-- Otros campos del formulario -->
+                <button type="submit" pButton label="Guardar Host" [disabled]="!formulario.valid"></button>
+            </form>
+        </div>
+    </p-dialog>
+
+    <div class="btns-container">
+        <p-button label="Nuevo Dispositivo" (click)="showDialog()" [rounded]="true" severity="secondary"></p-button>
+    </div>
+    <div class="canvas">
+        <div *ngFor="let h of hosts; let i = index" class="graficos">
+            <p-chart type="line" [data]="listData[i]" [options]="options"></p-chart>
+            <div class="btns-chart">
+                <p-button label="Log" (click)="viewLog(h.idHost)" [rounded]="true" severity="secondary"></p-button>
+                <p-button label="Eliminar" [rounded]="true" (click)="deleteHost(h.idHost)" severity="success"></p-button>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

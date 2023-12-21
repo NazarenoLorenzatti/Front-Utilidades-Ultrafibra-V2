@@ -14,12 +14,14 @@ export class DebitsComponent {
   value: string | undefined;
   date: Date | undefined;
   loading: boolean = false;
-  valueRdn: string = 'extracto';
   valueOpenClose: string = 'Abierto';
+  toggleTab1: boolean = true;
 
-  stateOptions: any[] = [{label: 'Extracto', value: 'extracto'}, {label: 'Respuestas', value: 'respuesta'}];
   abiertosCerrados: any[] = [{label: 'Abier.', value: 'abierto'}, {label: 'Cerr.', value: 'cerrado'}];
 
+  changeTab(value: boolean){
+    this.toggleTab1 = value;
+  }
 
   load() {
     this.loading = true;

@@ -10,6 +10,13 @@ import { TabViewModule } from 'primeng/tabview';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { CalendarModule } from 'primeng/calendar';
 import { ChartModule } from 'primeng/chart';
+import { DataViewModule } from 'primeng/dataview';
+import { SpeedDialModule } from 'primeng/speeddial';
+import { DialogModule } from 'primeng/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TagModule } from 'primeng/tag';
+import { CardModule } from 'primeng/card';
+
 
 @NgModule({
   declarations: [],
@@ -23,7 +30,14 @@ import { ChartModule } from 'primeng/chart';
     TabViewModule,
     SelectButtonModule,
     CalendarModule,
-    ChartModule
+    ChartModule,
+    DataViewModule,
+    SpeedDialModule,
+    DialogModule,
+    FormsModule, 
+    ReactiveFormsModule,
+    TagModule,
+    CardModule
   ],
   imports: [
     ButtonModule,
@@ -35,7 +49,14 @@ import { ChartModule } from 'primeng/chart';
     TabViewModule,
     SelectButtonModule,
     CalendarModule,
-    ChartModule
+    ChartModule,
+    DataViewModule,
+    SpeedDialModule,
+    DialogModule,
+    FormsModule, 
+    ReactiveFormsModule,
+    TagModule,
+    CardModule
   ]
 })
 export class NgPrimeModule { }

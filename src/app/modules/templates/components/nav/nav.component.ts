@@ -24,24 +24,29 @@ export class NavComponent implements OnInit{
   pantallaCelu: MediaQueryList;
   menuNav = [
     {
-      name: "Pagina Principal", 
-      ruta: "pagina-principal",
+      name: "Home", 
+      ruta: "home",
       icono: "home"
     },
     {
-      name: "Aplicaciones", 
-      ruta: "aplicaciones",
-      icono: "airplay"
+      name: "Homebanking", 
+      ruta: "homebanking",
+      icono: "account_balance"
     },
     {
-      name: "Administrativo", 
-      ruta: "perfil",
-      icono: "face"
+      name: "Debitos Automaticos", 
+      ruta: "debitos",
+      icono: "payment"
     },
     {
-      name: "Credenciales", 
-      ruta: "credenciales",
-      icono: "lock"
+      name: "Eventos Ping", 
+      ruta: "monitoreo-ping",
+      icono: "add_alert"
+    },
+    {
+      name: "Monitoreo SNMP", 
+      ruta: "monitoreo-snmp",
+      icono: "desktop_windows"
     }
   ]
 

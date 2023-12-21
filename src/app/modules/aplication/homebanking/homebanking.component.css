@@ -17,7 +17,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
     align-items: center;
 }
 
@@ -39,8 +38,7 @@
 }
 
 .card-inpt{
-    display: block;
-    width: 90%;
+    width: 100%;
 }
 
 #username{
@@ -70,16 +68,17 @@
     }
     
     .container-left {
-        width: 50%;
+        padding-left: 20px;
+        width: 30%;
         height: 100%;
     }
 
     .container-right {
-        width: 50%;
+        width: 70%;
         height: 100%;
     }
 
     .card-inpt{
-        width: 40%;
+        width: 60%;
     }
 }

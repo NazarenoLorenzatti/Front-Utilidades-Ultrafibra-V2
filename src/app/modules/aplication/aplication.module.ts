@@ -8,9 +8,9 @@ import { TemplateModule } from '../templates/template.module';
 import { HomebankingComponent } from './homebanking/homebanking.component';
 import { DebitsComponent } from './debits/debits.component';
 import { SnmpMonitorComponent } from './snmp-monitor/snmp-monitor.component';
-import { EventsComponent } from './events/events.component';
-
-
+import { HostMonitorComponent } from './host-monitor/hostmonitor.component';
+import { DeviceComponent } from './snmp-monitor/components/device/device.component';
+import { LogsComponent } from './host-monitor/logs/logs.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,9 @@ import { EventsComponent } from './events/events.component';
     HomebankingComponent,
     DebitsComponent,
     SnmpMonitorComponent,
-    EventsComponent
+    HostMonitorComponent,
+    DeviceComponent,
+    LogsComponent
   ],
   imports: [
     CommonModule,

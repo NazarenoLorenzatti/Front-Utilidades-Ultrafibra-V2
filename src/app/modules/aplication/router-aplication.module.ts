@@ -7,6 +7,10 @@ import { DebitsComponent } from './debits/debits.component';
 import { HostMonitorComponent } from './host-monitor/hostmonitor.component';
 import { SnmpMonitorComponent } from './snmp-monitor/snmp-monitor.component';
 import { LogsComponent } from './host-monitor/logs/logs.component';
+import { DeviceComponent } from './snmp-monitor/components/device/device.component';
+import { ProfileComponent } from './profile/profile.component';
+import { TechniciansComponent } from './technicians/technicians.component';
+
 
 const rutas: Routes = [
     {
@@ -43,7 +47,23 @@ const rutas: Routes = [
         path: 'log',
         component: LogsComponent,
         loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule)
+    },
+    {
+        path: 'gestion-snmp',
+        component: DeviceComponent,
+        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule)
+    },
+    {
+        path: 'perfil',
+        component: ProfileComponent,
+        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule)
+    },
+    {
+        path: 'tecnicos',
+        component: TechniciansComponent,
+        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule)
     }
+    
 ]
 
 @NgModule({

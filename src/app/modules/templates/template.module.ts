@@ -6,8 +6,6 @@ import { MaterialModule } from './material.module';
 import { NgPrimeModule } from './ng-prime.module';
 import { FooterComponent } from './components/footer/footer.component';
 
-
-
 @NgModule({
   declarations: [
     NavComponent,
@@ -21,7 +19,7 @@ import { FooterComponent } from './components/footer/footer.component';
     MaterialModule,
     NgPrimeModule,
     RouterModule,
-    CommonModule
+    CommonModule,
   ]
 })
 export class TemplateModule { }

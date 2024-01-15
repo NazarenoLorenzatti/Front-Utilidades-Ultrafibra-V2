@@ -7,6 +7,10 @@ import { SnmpMonitorComponent } from "./snmp-monitor/snmp-monitor.component";
 import { HostMonitorComponent } from "./host-monitor/hostmonitor.component";
 import { DebitsComponent } from "./debits/debits.component";
 import { LogsComponent } from "./host-monitor/logs/logs.component";
+import { DeviceComponent } from "./snmp-monitor/components/device/device.component";
+import { ProfileComponent } from "./profile/profile.component";
+import { TechniciansComponent } from "./technicians/technicians.component";
+
 
 const constRutasHijas: Routes = [
     { path: 'app', component: AppCommonsComponent},
@@ -16,6 +20,9 @@ const constRutasHijas: Routes = [
     { path: 'monitoreo-ping', component: HostMonitorComponent},
     { path: 'monitoreo-snmp', component: SnmpMonitorComponent},
     { path: 'log', component: LogsComponent},
+    { path: 'gestion-snmp', component: DeviceComponent},
+    { path: 'perfil', component: ProfileComponent},
+    { path: 'tecnicos', component: TechniciansComponent},
   ]
   
   @NgModule({

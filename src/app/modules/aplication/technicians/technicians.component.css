@@ -1,0 +1,39 @@
+.container{
+    width: 98%;
+    height: 100%;
+    flex-wrap: wrap;
+    overflow-y: auto;
+}
+
+.btns{
+    height: 10%;
+}
+
+.card-tec{
+    width: 200px;
+    height: 455px;
+    margin-right: 20px;
+}
+
+.footer{
+    width: 100%;
+}
+
+img{
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.modal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input{
+    width: 100%;
+}
+
+.input-form{
+    margin-bottom: 15px;
+}

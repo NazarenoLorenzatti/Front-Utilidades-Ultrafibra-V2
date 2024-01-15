@@ -1,18 +1,16 @@
-<div class="container">
+<div class="container flex-center column">
 
-    <div class="card flex justify-content-center gap-2">
-        <p-toast></p-toast>
-        <!--<button type="button" pButton pRipple (click)="showSuccess()" label="Success" class="p-button-success"></button>
-        <button type="button" pButton pRipple (click)="showError()" label="Error" class="p-button-danger"></button> -->
-    </div>
+    <p-toast></p-toast>
 
+    <!-- MODAL PARA NUEVO HOST -->
     <p-dialog header="Nuevo Host" [(visible)]="visible" [modal]="true" [style]="{ width: '30vw' }" [draggable]="false"
         [resizable]="false">
         <div class="modal">
             <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
                 <div class="input-form">
                     <label for="nombreHost">Nombre de Host:</label>
-                    <input id="nombreHost" type="text" aria-describedby="name-help" pInputText formControlName="nombreHost" />
+                    <input id="nombreHost" type="text" aria-describedby="name-help" pInputText
+                        formControlName="nombreHost" />
                     <small id="name-help">Ingrese el nombre del Host.</small>
                 </div>
                 <div class="input-form">
@@ -20,23 +18,47 @@
                     <input id="ipHost" type="text" aria-describedby="ip-help" pInputText formControlName="ipHost" />
                     <small id="ip-help">Ingrese la Ip a monitorear.</small>
                 </div>
-                <!-- Otros campos del formulario -->
                 <button type="submit" pButton label="Guardar Host" [disabled]="!formulario.valid"></button>
             </form>
         </div>
     </p-dialog>
 
-    <div class="btns-container">
+    <div class="flex-center row btn-add-container">
         <p-button label="Nuevo Dispositivo" (click)="showDialog()" [rounded]="true" severity="secondary"></p-button>
+        <p-button label="Gestionar Alertas" icon="pi pi-plus" (click)="goToTechnicians()"></p-button>
     </div>
-    <div class="canvas">
-        <div *ngFor="let h of hosts; let i = index" class="graficos">
-            <p-chart type="line" [data]="listData[i]" [options]="options"></p-chart>
-            <div class="btns-chart">
-                <p-button label="Log" (click)="viewLog(h.idHost)" [rounded]="true" severity="secondary"></p-button>
-                <p-button label="Eliminar" [rounded]="true" (click)="deleteHost(h.idHost)" severity="success"></p-button>
+    <div *ngIf="hosts; else noHosts" class="container">
+        <div class="flex-center {{ isPhone ? 'column' : 'row' }} container-cards">
+            <div *ngFor="let h of hosts" class="card row flex-center" [ngClass]="{'alert-card': isOn(h)}">
+                <div class="icon-host flex-around column">
+                    <div class="icon flex-center column" *ngIf="!isOn(h); else iconSpin">
+                        <i class="pi pi-cog" style="font-size: 5rem"></i>
+                        <p>Apagado</p>
+                    </div>
+                    <ng-template class="icon" #iconSpin>
+                        <i class="pi pi-spin pi-cog" style="font-size: 5rem"></i>
+                        <p>Encendido</p>
+                    </ng-template>
+                    <b>Ultimo Encendido:</b>
+                    <h5>{{ h.logs?.length ? (h.logs[h.logs.length - 1].inicio | date: 'dd/MM/yyyy') : 'N/A' }}</h5>
+                </div>
+                <div class="data-host flex-around column">
+                    <h2>{{h.nombreHost}}</h2>
+                    <h4>{{h.ipHost}}</h4>
+                    <div class="buttons flex-around">
+                        <p-button icon="pi pi-bookmark" (click)="showDialogEdit(h)" pTooltip="Editar el Host" tooltipPosition="bottom" severity="secondary"></p-button>
+                        <p-button icon="pi pi-search" (click)="viewLog(h.idHost)"  pTooltip="Ver Logs" tooltipPosition="bottom" severity="success"></p-button>
+                        <p-button icon="pi pi-trash"  (click)="deleteHost(h.idHost)" pTooltip="Eliminar el Host" tooltipPosition="bottom" severity="danger"></p-button>
+                    </div>
+                    <b>Uso Total</b>
+                    <h5 *ngIf="getTotalTiempoUso(h) < 60"> {{ getTotalTiempoUso(h) | number: '1.2-2'}} minutos</h5>
+                    <h5 *ngIf="getTotalTiempoUso(h) > 60"> {{ getTotalTiempoUso(h) / 60 | number: '1.2-2'}} Hora/s</h5>
+                </div>
             </div>
         </div>
     </div>
+    <ng-template #noHosts>
+        <p-messages [(value)]="messageNoHost" [enableService]="false"></p-messages>
+      </ng-template>
 </div>
 <app-footer></app-footer>

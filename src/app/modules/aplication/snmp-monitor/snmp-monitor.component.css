@@ -1,17 +1,241 @@
-.container{
-    width: 100%;
+img {
+    border-radius: 10px;
+    border: 2px solid   #22222275;
+    box-shadow: 2px 2px 20px 5px rgba(50, 49, 49, 0.8);
     height: 100%;
+    width: 100%;
+}
+p-button{
+    margin-right: 10px;
 }
 
-.header-table{
+h2,
+b,
+p {
+    margin: 0px;
+}
+
+.container {
+    color: white;
+    width: 100%;
+    height: 130%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.btns-container{
+.btns-container {
     width: 80%;
     height: 10%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
+}
+
+.devices {
+    width: 90%;
+    height: 90%;
+    border: 2px solid #222222;
+    box-shadow: 2px 2px 20px 5px rgba(50, 49, 49, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.btns-layout {
+    width: 80%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.btns {
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.modal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input{
+    width: 100%;
+}
+
+.input-form{
+    margin-bottom: 15px;
+}
+
+/* Vista en Lista */
+.layout-list {
+    width: 95%;
+    height: 88%;
+    overflow: auto;
+}
+
+.row {
+    width: 100%;
+    height: 15%;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: 2px solid #222222;
+}
+
+.row.alert-row {
+    order: -1;
+    background-color: rgba(164, 30, 30, 0.395);
+  }
+
+.img-container {
+    height: 85%;
+    width: 40%;
+}
+
+.info-container {
+    height: 95%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.actions-container {
+    height: 95%;
+    display: flex;
+    justify-content: flex-end;
+    width: 20%;
+}
+
+.actions {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+
+
+@media screen and (min-width: 720px) {
+
+    .btns-layout {
+        width: 95%;
+        height: 10%;
+    }
+
+    .btns {
+        width: 15%;
+    }
+
+    /* Vista en Lista */
+    .layout-list {
+        width: 95%;
+        height: 88%;
+        overflow: auto;
+    }
+
+    .row {
+        width: 100%;
+        height: 20%;
+        margin-bottom: 10px;
+        padding-left: 20px;
+        border-bottom: 2px solid #222222;
+    }
+
+    .img-container {
+        height: 95%;
+        width: 15%;
+    }
+
+    .info-container {
+        height: 95%;
+        width: 25%;
+        padding-left: 20px;
+    }
+
+    .alert{
+        background-color: red;
+        width: 30%;
+        height: 100%;
+    }
+
+    .actions-container {
+        height: 95%;
+        width: 40%;
+    }
+
+    .actions {
+        height: 100%;
+        flex-direction: row;
+        width: 25%;
+    }
+
+    /* Vista en Grilla */
+    .layout-grid {
+        width: 95%;
+        height: 88%;
+        flex-wrap: wrap;
+        display: flex;
+        justify-content: space-around;
+        overflow: auto;
+    }
+
+    .grid {
+        width: 28%;
+        height: 60%;
+        border: 1px solid #636262a2;
+        border-radius: 6px;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .comunidad-grid{
+        height: 10%;
+        width: 98%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .title-grid{
+        width: 75%;
+        height: 70%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .img-grid{
+        border-radius: 6px;
+        height: 50%;
+        width: 80%;
+        margin-bottom: 10px;
+    }
+
+    .actions-grid{
+        height: 20%;
+        width: 98%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+    
+
 }

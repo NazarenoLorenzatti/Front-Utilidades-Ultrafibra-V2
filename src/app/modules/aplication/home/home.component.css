@@ -24,7 +24,7 @@ a{
 }
 
 .container-homebanking, .container-tec{
-    height: 33.333%;
+    height: 45%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -98,7 +98,7 @@ a{
     }
 
     .titulo{
-        width: 15%;
+        width: 20%;
         height: 100%;
         display: flex;
         align-items: center;
@@ -120,8 +120,8 @@ a{
     }
 
     .icon{
-       width: 160px;
-       height: 160px;
+       width: 150px;
+       height: 150px;
     }
 
     

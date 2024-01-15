@@ -1,1 +1,211 @@
-<p>device works!</p>
+<div class="container">
+
+    <!-- Confirmacion y Aviso -->
+    <p-toast></p-toast>
+    <p-confirmDialog></p-confirmDialog>
+
+    <!-- Modal nuevo OID -->
+    <p-dialog header="Nuevo  OID" [(visible)]="viewNewOidModal" [modal]="true" [style]="{ width: '30vw' }"
+        [draggable]="false" [resizable]="false">
+        <div class="modal">
+            <form [formGroup]="formNewOid" (ngSubmit)="onSubmitNewModal()">
+                <div class="input-form">
+                    <label for="oid">OID:</label>
+                    <input id="oid" type="text" aria-describedby="oid-help" pInputText formControlName="oid" />
+                    <small id="oid-help">Ingrese el Codigo OID.</small>
+                </div>
+                <div class="input-form">
+                    <label for="eventOid">Evento OID:</label>
+                    <input id="eventOid" type="text" aria-describedby="eventOid-help" pInputText
+                        formControlName="eventOid" />
+                    <small id="eventOid-help">Ingrese el nombre del Evento.</small>
+                </div>
+                <button type="submit" pButton label="Guardar Oid" [disabled]="!formNewOid.valid"></button>
+            </form>
+        </div>
+    </p-dialog>
+
+    <!-- Modal nueva Variable -->
+    <p-dialog header={{tituloModal}} [(visible)]="viewNewVariableModal" [modal]="true" [style]="{ width: '30vw' }"
+        [draggable]="false" [resizable]="false">
+        <div class="modal">
+            <form [formGroup]="formVariable" (ngSubmit)="onSubmitVariableModal(editVar)">
+                <div class="input-form">
+                    <label for="valueVariable">Valor Variable:</label>
+                    <input id="valueVariable" type="text" aria-describedby="valueVariable-help" pInputText
+                        formControlName="valueVariable" />
+                    <small id="valueVariable-help">Ingrese el valor de la variable OID.</small>
+                </div>
+                <div class="input-form">
+                    <label for="syntaxVariable">Sintaxis de Variable</label>
+                    <input id="syntaxVariable" type="text" aria-describedby="syntaxVariable-help" pInputText
+                        formControlName="syntaxVariable" />
+                    <small id="syntaxVariable-help">Ingrese el nombre de la variable.</small>
+                </div>
+
+                <div class="input-form">
+                    <div class="dropdown">
+                        <label for="prioridadVariable">Prioridad de Variable:</label>
+                        <p-dropdown appendTo="body" [style]="{ width: '100%' }" id="prioridadVariable"
+                            [options]="prioridadOptions" formControlName="prioridadVariable"></p-dropdown>
+                    </div>
+                </div>
+                <button type="submit" pButton label="Guardar Variable" [disabled]="!formVariable.valid"></button>
+            </form>
+        </div>
+    </p-dialog>
+
+    <section class="section-rigth">
+        <!-- INFO DEL DISPOSITIVO -->
+        <div class="device">
+            <div class="comunidad-grid">
+                <p>{{deviceSnmp?.comunidad }}</p>
+            </div>
+            <div class="title-grid">
+                <div class="img-grid">
+                    <img src="../assets/imagenes/ups.jpg" />
+                </div>
+                <h2 style="margin-bottom: 10px;">{{deviceSnmp?.nombreDispositivo}}</h2>
+                <b style="margin-bottom: 10px;">{{deviceSnmp?.ipDispositivo}}</b>
+                <p-button label="boton de prueba SNMP" severity="secondary" (click)="op.toggle($event)" size="small"
+                    [disabled]="!deviceSnmp?.oids || deviceSnmp?.oids === 0"></p-button>
+
+                <p-overlayPanel #op>
+                    <form [formGroup]="formTest" (ngSubmit)="onSubmitTest(deviceSnmp?.oids[0].oid, deviceSnmp?.ipDispositivo)">
+                        <div class="input-form">
+                            <label for="telephone">Telefono:</label>
+                            <input id="telephone" type="text" aria-describedby="telephone-help" pInputText
+                                formControlName="telephone" />
+                            <small id="telephone-help">Telefono para Prueba.</small>
+                        </div>
+                        <div class="input-form">
+                            <label for="email">Email:</label>
+                            <input id="email" type="text" aria-describedby="email-help" pInputText
+                                formControlName="email" />
+                            <small id="email-help">Ingrese el email de Prueba.</small>
+                        </div>
+                        <button type="submit" pButton label="Test" [disabled]="!formTest.valid"></button>
+                    </form>
+                </p-overlayPanel>
+            </div>
+        </div>
+
+        <div class="title-table">
+            <h3>Oids de control</h3>
+            <p-button size="small" icon="pi pi-plus" severity="secondary" pTooltip="Nuevo OID" tooltipPosition="bottom"
+                (click)="showNewOidModal()"></p-button>
+        </div>
+
+        <!-- TABLA CON OIDS DEL DISPOSITIVO -->
+        <div class="table-container ">
+            <p-table [value]="oids" dataKey="evento" [tableStyle]="{ 'min-width': '30rem' }">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 10rem"></th>
+                        <th pSortableColumn="evento" style="width: 10rem"></th>
+                        <th style="width: 10rem"></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-oid let-expanded="expanded">
+                    <tr>
+                        <td>
+                            <button type="button" pButton pRipple [pRowToggler]="oid"
+                                class="p-button-text p-button-rounded p-button-plain"
+                                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">{{oid.evento}}
+                            </button>
+                        </td>
+                        <td>
+                            {{oid.evento}}
+                        </td>
+                        <td>
+                            <div>
+                                <p-button (click)="showNewVariableModal(oid?.idOid)" icon="pi pi-plus" size="small">
+                                </p-button>
+                                <p-button (click)="confirmDialog(oid.idOid , 'oid')" icon="pi pi-trash"
+                                    styleClass="p-button-danger" size="small">
+                                </p-button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="rowexpansion" let-oid>
+                    <tr style="background-color: #222222;">
+                        <td colspan="7">
+                            <div class="p-3">
+                                <p-table [tableStyle]="{ 'min-width': '30rem'}" [value]="oid.variables" dataKey="id">
+                                    <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 10rem"></th>
+                        <th style="width: 10rem"></th>
+                        <th style="width: 10rem"></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-variable>
+                    <tr>
+                        <td>{{variable.sintaxisVariable}}</td>
+                        <td><p-tag [severity]="getSeverity(variable.prioridad)" value="{{variable.prioridad}}"></p-tag>
+                        </td>
+                        <td>
+                            <div class="column-actions">
+                                <p-button (click)="editVariable(variable , oid)" icon="pi pi-file-edit"
+                                    size="small"></p-button>
+                                <p-button (click)="confirmDialog(variable.idVariable, 'variable')" icon="pi pi-trash"
+                                    styleClass="p-button-danger" size="small"></p-button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="6">No hay ninguna Variable para este OID</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        </td>
+        </tr>
+        </ng-template>
+        </p-table>
+</div>
+</section>
+
+<!-- TABLA CON EVENTOS -->
+<section class="section-left">
+    <div class="table-container-log">
+        <p-table [value]="events" [tableStyle]="{'width': '100%'}" [paginator]="true" [rows]="5"
+            [showCurrentPageReport]="true" currentPageReportTemplate="{first} to {last} of {totalRecords}" [rows]="10"
+            [rowsPerPageOptions]="[5 , 10]">
+            <ng-template pTemplate="caption">
+                <div class="table-caption">
+                    <h2> Eventos SNMP </h2>
+                    <p-button (click)="clearLogs($event)" icon="pi pi-times" label="Delete" severity="danger"
+                        [disabled]="!events || events.length === 0"></p-button>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="idEvento" style="width:25%">Id Evento <p-sortIcon
+                            field="idEvento"></p-sortIcon></th>
+                    <th pSortableColumn="fechaEvento" style="width:25%">Fecha Evento <p-sortIcon
+                            field="fechaEvento"></p-sortIcon></th>
+                    <th style="width:40%">Log</th>
+                    <th style="width:10%">#</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-event>
+                <tr>
+                    <td>{{event.idEvento}}</td>
+                    <td>{{event.fechaEvento | date: 'MM/dd/yyyy'}}</td>
+                    <td><p-tag [value]="event.logEvento" [severity]="getSeverity(event.prioridad)"
+                            [style]="{ 'min-width': '15rem', 'font-size': '20px' } "></p-tag></td>
+                    <td>
+                        <p-button icon="pi pi-trash" (click)="deleteLog(event.idEvento)" [rounded]="true" severity="warning"></p-button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</section>
+</div>
+<app-footer></app-footer>

@@ -1,9 +1,12 @@
 <div class="container">
+    <p-toast></p-toast>
+    <p-confirmPopup></p-confirmPopup>
     <div class="table-container">
         <div class="header-nav">
             <p-button icon="pi pi-arrow-left" [rounded]="true" severity="secondary" (click)="back()"></p-button>
-            <p-button icon="pi pi-trash" [rounded]="true" severity="danger" (click)="back()"></p-button>
+            <p-button icon="pi pi-trash" [rounded]="true" severity="danger" (click)="clearLogs($event)"></p-button>
         </div>
+
         <div class="card">
             <p-table 
             [paginator]="true"
@@ -11,7 +14,6 @@
             [showCurrentPageReport]="true"
             currentPageReportTemplate="{first} de {last}"
             [rowsPerPageOptions]="[10, 25, 50]"
-            paginatorLocale="fa-IR"
             [value]="logs" [tableStyle]="{'min-width': '30rem'}">
                 <ng-template pTemplate="header" let-columns>
                     <tr>
@@ -35,15 +37,16 @@
     </div>
     <div class="kpis-container">
         <div class="kpi">
-            <h2> Total En El Mes </h2>
+            <h2> Ultimo Encendido</h2>
             <div class="horas">
-                <b>{{hoursMonth}}</b>
+                <p-chart type="bar" [data]="dataChart" [options]="optionsChart"></p-chart>
             </div>
         </div>
         <div class="kpi">
-            <h2> Ultimo Encendido</h2>
+            <h2> Total En El Mes </h2>
             <div class="horas">
-                <b>{{lastDate | date: 'dd-MM-yyyy'}}</b>
+                <h5 *ngIf="getTotalTiempoUso(logs) < 60"> {{ getTotalTiempoUso(logs) | number: '1.2-2'}} minutos</h5>
+                    <h5 *ngIf="getTotalTiempoUso(logs) > 60"> {{ getTotalTiempoUso(logs) / 60 | number: '1.2-2'}} Hora/s</h5>
             </div>
         </div>
     </div>

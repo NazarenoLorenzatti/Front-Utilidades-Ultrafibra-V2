@@ -10,8 +10,8 @@ body{
     background-color: #071426;
 }
 
-p, h3{
-    margin: 0;
+h1, h2, h3, h4, h5, h6, p, b{
+    margin: 0px;
 }
 
 @font-face {
@@ -22,4 +22,25 @@ p, h3{
 
 h1,p,h2,h3,h4,h5,h6,b {
     font-family: 'fuentePersonalizada';
+}
+
+/* CLASES COMUNES */
+.flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-around{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.row {
+    flex-direction: row;
 }

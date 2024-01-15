@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
@@ -16,11 +16,20 @@ import { DialogModule } from 'primeng/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TagModule } from 'primeng/tag';
 import { CardModule } from 'primeng/card';
-
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DropdownModule } from 'primeng/dropdown';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [],
-  providers: [MessageService],
+  providers: [
+    DatePipe ,
+    MessageService,
+    ConfirmationService
+  ],
   exports: [
     ButtonModule,
     FileUploadModule,
@@ -37,7 +46,12 @@ import { CardModule } from 'primeng/card';
     FormsModule, 
     ReactiveFormsModule,
     TagModule,
-    CardModule
+    CardModule,
+    SplitButtonModule,
+    ConfirmDialogModule,
+    DropdownModule,
+    ConfirmPopupModule,
+    OverlayPanelModule
   ],
   imports: [
     ButtonModule,
@@ -56,7 +70,12 @@ import { CardModule } from 'primeng/card';
     FormsModule, 
     ReactiveFormsModule,
     TagModule,
-    CardModule
+    CardModule,
+    SplitButtonModule,
+    ConfirmDialogModule,
+    DropdownModule,
+    ConfirmPopupModule,
+    OverlayPanelModule
   ]
 })
 export class NgPrimeModule { }

@@ -1,48 +1,4 @@
-.container{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding-top: 20px;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    
-}
-.btns-container{
-    width: 70%;
-    height: 10%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-.canvas{
-    padding-top: 20px;
-    width: 100%;
-    height: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    overflow-y: scroll;
-}
-
-
-.graficos{
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    width: 95%;
-}
-
-.btns-chart{
-    width: 70%;
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-around;
-}
-
+/* VENTANA MODAL */
 .modal{
     display: flex;
     justify-content: center;
@@ -57,19 +13,73 @@ input{
     margin-bottom: 15px;
 }
 
+/* ----------------------------------- */
+
+.container{
+    padding-top: 30px;
+    width: 100%;
+    height: auto;
+    max-height: 720px;
+    overflow-y: auto;
+}
+
+.btn-add-container{
+    width: 70%;
+    height: 10%;
+}
+
+.container-cards{
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.noHost{
+    width: 300px;
+    height: 200px;
+    background-color: aquamarine;
+}
+
+.card{
+    margin: 0px 0px 20px 0px;
+    background-color: white;
+    width: 100%;
+    height: 150px;
+}
+
+.card.alert-card{
+    order: -1;
+    background-color: brown;
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+}
+
+.icon-host{
+    width: 35%;
+    height: 100%;
+}
+
+.data-host{
+    width: 65%;
+    height: 100%;
+}
+
+.buttons{
+    width: 60%;
+}
+
 @media screen and (min-width: 720px) {
 
     .btns-container{
         width: 30%;
     }
 
-    .canvas{
-        width: 75%;
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-
-    .graficos{
-        width: 40%;
+    .card{
+        margin: 0px 20px 0px 0px;
+        width: 30%;
+        height: 200px;
     }
 }

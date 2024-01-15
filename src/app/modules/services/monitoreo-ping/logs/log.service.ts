@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 const base_url = "http://localhost:8080/api/v1/logs"
 
-const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcwMzI2MTA5Nn0.a4njYoPTbMgGn_xjB2Tp886puo0GPM5oLfrVAiBQWaHV-zMGLi_HvkdiVrWQpS6ze1w7gsNXrcYKRRU-2rLsg4hny3wxe2ox-gv2eXR3WYi95LJUk1SFHCqKCeSJAUV8lI2tReK08-xZG012O5NPBoi0qsXJrV6eOMSHwCMQUjTAm4hqZgp3PSjS8gaml9qjeg-Q7bCYoPJW2mKbQAfDu02GuDyQgkJFJAlbOzOe7Dozg1F6nrg8lr5S2S1wqW-5_UActmDpm_30hb9uJf-jSh7MY7iJWjsnTxqJ0bW14lBFWTQuBY7L4s5ttTDCNpNTdw5Suc-uHwMwb-vTJKZbyQ";
+const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcwNTA5OTMxNn0.VJyPFpEQdiYkanOtjQlWVNtUGqrrcmOX6ITjbKbxXMakvlHoYO0m6II50RcmEnorTYRTOAMPiy4ak2acsKrg19VufXDfqsUq5W3xOI2L05Fq5RaNZAIKlHzAfQwZ09M9DN1FVYqpXbWmHiwPks5Np6riAwIGtQ_CcR0wngXMoAnhusqG7Fl62WIKPxcD8iLY4rv_aLOo1sJXbrQ3geL9NbvxGbx2asZt3jGdlWwVElDh5woBdyW4mWtBzen5VZQeq4QqBv29JPWRK03iYihTpITeQdfWx-p-hWq_gtX2izwkBBtSMaYocH06C-3TQCEUYIgjROFxeCPSQq-2vQGmKA";
 @Injectable({
   providedIn: 'root'
 })
@@ -35,6 +35,15 @@ export class LogService {
       //Authorization: 'Bearer ' + localStorage.getItem('token'),
     };
     const endpoint = `${base_url}/ultimo-log`;
+    return this.http.post(endpoint, body,  { headers });
+  }
+
+  deleteLog(body: any){
+    const headers = {
+      Authorization: 'Bearer ' + token,
+      //Authorization: 'Bearer ' + localStorage.getItem('token'),
+    };
+    const endpoint = `${base_url}/eliminar-log-hostg`;
     return this.http.post(endpoint, body,  { headers });
   }
 

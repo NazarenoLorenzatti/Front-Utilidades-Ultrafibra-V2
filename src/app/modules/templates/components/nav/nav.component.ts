@@ -47,6 +47,11 @@ export class NavComponent implements OnInit{
       name: "Monitoreo SNMP", 
       ruta: "monitoreo-snmp",
       icono: "desktop_windows"
+    },
+    {
+      name: "Perfil", 
+      ruta: "perfil",
+      icono: "perm_identity"
     }
   ]
 

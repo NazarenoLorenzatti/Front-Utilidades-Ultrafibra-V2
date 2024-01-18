@@ -1,1 +1,26 @@
-<p>profile works!</p>
+<div class="container flex-center">
+    <div class="left flex-center column">
+        <div class="btn-upload flex-center row">
+            <button pButton pRipple label="Cargar Foto" class="p-button-success"></button>
+        </div>
+        <div class="img-container flex-center"> 
+            <img class="img-perfil" *ngIf="imgPerfil" [src]="imgPerfil" alt="Mi Imagen" />
+            <img class="img-perfil" *ngIf="!imgPerfil" src="../assets/imagenes/sin-foto.jpg" alt="Mi Imagen" />
+        </div>
+    </div>
+    <div class="right flex-center column">
+        <ul class="flex-center column">
+            <li> <h2> {{rep?.nombre + " " + rep?.apellido }}  </h2></li>
+            <li> <h5> {{rep?.telefono}} </h5>  </li>
+            <li> <h5> {{rep?.email}} </h5> </li>
+            <li> ●●●●●●● </li>
+            <li>
+                <p-button label="Editar Usuario" severity="warn"></p-button>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="flex-center column">
+    <p-button (click)="deleteUser()" label="Eliminar Usuario" severity="danger"></p-button>
+</div>
+

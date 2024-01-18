@@ -10,58 +10,69 @@ import { LogsComponent } from './host-monitor/logs/logs.component';
 import { DeviceComponent } from './snmp-monitor/components/device/device.component';
 import { ProfileComponent } from './profile/profile.component';
 import { TechniciansComponent } from './technicians/technicians.component';
+import { AuthGuard } from 'src/app/AuthGuard';
 
 
 const rutas: Routes = [
     {
         path: 'app',
         component: AppCommonsComponent,
-        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule)
+        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule),
+        canActivate: [AuthGuard]
     },
     {
         path: 'home',
         component: HomeComponent,
-        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule)
+        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule),
+        canActivate: [AuthGuard]
     },
     {
         path: 'homebanking',
         component: HomebankingComponent,
-        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule)
+        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule),
+        canActivate: [AuthGuard]
     },
     {
         path: 'debitos',
         component: DebitsComponent,
-        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule)
+        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule),
+        canActivate: [AuthGuard]
     },
     {
         path: 'monitoreo-ping',
         component: HostMonitorComponent,
-        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule)
+        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule),
+        canActivate: [AuthGuard]
     },
     {
         path: 'monitoreo-snmp',
         component: SnmpMonitorComponent,
-        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule)
+        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule),
+        canActivate: [AuthGuard]
     },
     {
         path: 'log',
         component: LogsComponent,
-        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule)
+        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule),
+        canActivate: [AuthGuard]
     },
     {
         path: 'gestion-snmp',
         component: DeviceComponent,
-        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule)
+        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule),
+        canActivate: [AuthGuard]
     },
     {
         path: 'perfil',
         component: ProfileComponent,
-        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule)
+        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule),
+        canActivate: [AuthGuard]
     },
     {
         path: 'tecnicos',
         component: TechniciansComponent,
-        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule)
+        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule),
+        canActivate: [AuthGuard]
     }
     
 ]

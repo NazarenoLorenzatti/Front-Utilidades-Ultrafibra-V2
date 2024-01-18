@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppCommonsComponent } from './app-commons/app-commons.component';
 import { HomeComponent } from './home/home.component';
@@ -34,4 +34,5 @@ import { TechniciansComponent } from './technicians/technicians.component';
     TemplateModule
   ]
 })
-export class AplicationModule { }
+export class AplicationModule { 
+}

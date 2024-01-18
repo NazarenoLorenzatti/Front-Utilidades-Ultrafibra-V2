@@ -22,6 +22,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { DatePipe } from '@angular/common';
+import { StepsModule } from 'primeng/steps';
+
 
 @NgModule({
   declarations: [],
@@ -51,7 +53,8 @@ import { DatePipe } from '@angular/common';
     ConfirmDialogModule,
     DropdownModule,
     ConfirmPopupModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    StepsModule
   ],
   imports: [
     ButtonModule,
@@ -75,7 +78,8 @@ import { DatePipe } from '@angular/common';
     ConfirmDialogModule,
     DropdownModule,
     ConfirmPopupModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    StepsModule
   ]
 })
 export class NgPrimeModule { }

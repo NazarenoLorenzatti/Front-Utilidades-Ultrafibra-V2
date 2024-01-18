@@ -14,6 +14,11 @@ h1, h2, h3, h4, h5, h6, p, b{
     margin: 0px;
 }
 
+
+body{
+    color: white;
+}
+
 @font-face {
     font-family: 'fuentePersonalizada';
     src: url('./assets/font/Proxima Nova Condensed Bold.ttf');
@@ -31,6 +36,18 @@ h1,p,h2,h3,h4,h5,h6,b {
     justify-content: center;
 }
 
+.flex-end{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.flex-between{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .flex-around{
     display: flex;
     align-items: center;
@@ -43,4 +60,39 @@ h1,p,h2,h3,h4,h5,h6,b {
 
 .row {
     flex-direction: row;
+}
+
+.widthComplete {
+    width: 100%;
+
+}
+
+.heightComplete{
+    height: 100%;
+}
+
+.widthThreeQuarter {
+    width: 75%;
+
+}
+
+.heightThreeQuarter{
+    height: 75%;
+}
+
+.widthMiddle {
+    width: 50%;
+
+}
+
+.heightMiddle{
+    height: 50%;
+}
+
+.widthQuarter{
+    width: 25%;
+}
+
+.heightQuarter{
+    height: 25%;
 }

@@ -10,19 +10,20 @@ import { LogsComponent } from "./host-monitor/logs/logs.component";
 import { DeviceComponent } from "./snmp-monitor/components/device/device.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { TechniciansComponent } from "./technicians/technicians.component";
+import { AuthGuard } from "src/app/AuthGuard";
 
 
 const constRutasHijas: Routes = [
-    { path: 'app', component: AppCommonsComponent},
-    { path: 'home', component: HomeComponent},
-    { path: 'homebanking', component: HomebankingComponent},
-    { path: 'debitos', component: DebitsComponent},
-    { path: 'monitoreo-ping', component: HostMonitorComponent},
-    { path: 'monitoreo-snmp', component: SnmpMonitorComponent},
-    { path: 'log', component: LogsComponent},
-    { path: 'gestion-snmp', component: DeviceComponent},
-    { path: 'perfil', component: ProfileComponent},
-    { path: 'tecnicos', component: TechniciansComponent},
+    { path: 'app', component: AppCommonsComponent, canActivate: [AuthGuard]},
+    { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+    { path: 'homebanking', component: HomebankingComponent, canActivate: [AuthGuard]},
+    { path: 'debitos', component: DebitsComponent, canActivate: [AuthGuard]},
+    { path: 'monitoreo-ping', component: HostMonitorComponent, canActivate: [AuthGuard]},
+    { path: 'monitoreo-snmp', component: SnmpMonitorComponent, canActivate: [AuthGuard]},
+    { path: 'log', component: LogsComponent, canActivate: [AuthGuard]},
+    { path: 'gestion-snmp', component: DeviceComponent, canActivate: [AuthGuard]},
+    { path: 'perfil', component: ProfileComponent, canActivate: [AuthGuard]},
+    { path: 'tecnicos', component: TechniciansComponent, canActivate: [AuthGuard]},
   ]
   
   @NgModule({

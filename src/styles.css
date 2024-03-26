@@ -1,17 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
-@import "primeng/resources/themes/lara-light-blue/theme.css";
-@import "src/assets/themes/theme.css";
+/*@import "primeng/resources/themes/lara-light-blue/theme.css";*/
+/*@import "src/assets/themes/theme.css";*/
 @import "primeng/resources/primeng.css";
 @import 'primeicons/primeicons.css';
 
 html, body {height: 100%;}
 body{
     margin: 0;
-    background-color: #071426;
 }
 
-p{
-    margin: 0;
+h1, h2, h3, h4, h5, h6, p, b{
+    margin: 0px;
+}
+
+
+body{
+    color: white;
 }
 
 @font-face {
@@ -22,4 +26,78 @@ p{
 
 h1,p,h2,h3,h4,h5,h6,b {
     font-family: 'fuentePersonalizada';
+}
+
+/* CLASES COMUNES */
+.flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-end{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.flex-start{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.flex-between{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-around{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.widthComplete {
+    width: 100%;
+
+}
+
+.heightComplete{
+    height: 100%;
+}
+
+.widthThreeQuarter {
+    width: 75%;
+
+}
+
+.heightThreeQuarter{
+    height: 75%;
+}
+
+.widthMiddle {
+    width: 50%;
+
+}
+
+.heightMiddle{
+    height: 50%;
+}
+
+.widthQuarter{
+    width: 25%;
+}
+
+.heightQuarter{
+    height: 25%;
 }

@@ -3,10 +3,6 @@ h4, p{
 }
 
 .container {
-    background-color: #071426;
-    display: flex;
-    flex-direction: column; /* Posicionar en forma vertical de arriba hacia abajo */
-    position: absolute; /* posicionar siempre al frente*/
     top: 0;
     bottom: 0;
     left: 0;
@@ -14,22 +10,16 @@ h4, p{
 }
 
 .nav-toolbar{
-    display: flex;
-    justify-content: space-between;
     height: 80px;
     font-size: 26px;
     border-bottom: 5px solid transparent;
     border-image: linear-gradient(to right, #4158F0, #31FB73);
     border-image-slice: 1;
 }
-.logo-navbar{
-    height: 93%;
-    width: 15%;
-}
 
-.img-logo-navbar{
-    height: 100%;
-    width: 100%;
+.logo-navbar{
+    height: 70px;
+    width: 270px;
 }
 
 .is-mobile .nav-toolbar{
@@ -65,10 +55,6 @@ ul li {
 }
 
 .header{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     margin-top: 20px;
 }
 
@@ -81,32 +67,18 @@ ul li {
     height: 100px;
 }
 
-.img{
-    border-radius: 100%;
-    
-}
-
 .img-perfil{
     border: 1px solid #ddd;
     padding: 5px;
     width: 150px;
     border-radius: 100px;
-    width: 100%;
-    height: 100%;
   }
   
-  .botones{
-    display: flex;
-    flex-direction: column;
-}
 
 .btn{
     padding-top: 20px;
     padding-bottom: 20px;
-    width: 100%;
     font-size: 15px;
-    display: flex;
-    justify-content: flex-start;
     padding-left: 8%;
 }
 

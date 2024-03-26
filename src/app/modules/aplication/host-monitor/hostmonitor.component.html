@@ -1,0 +1,68 @@
+<div class="container w-full h-full flex flex-column justify-content-around align-items-center">
+
+    <p-toast></p-toast>
+
+    <!-- MODAL PARA NUEVO HOST -->
+    <p-dialog header="Nuevo Host" [(visible)]="visible" [modal]="true" [style]="{ width: '30vw' }" [draggable]="false"
+        [resizable]="false">
+        <div class="flex align-items-center justify-content-center">
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+                <div class="input-form">
+                    <label for="nombreHost">Nombre de Host:</label>
+                    <input id="nombreHost" type="text" aria-describedby="name-help" pInputText
+                        formControlName="nombreHost" />
+                    <small id="name-help">Ingrese el nombre del Host.</small>
+                </div>
+                <div class="input-form">
+                    <label for="ipHost">Ip Host:</label>
+                    <input id="ipHost" type="text" aria-describedby="ip-help" pInputText formControlName="ipHost" />
+                    <small id="ip-help">Ingrese la Ip a monitorear.</small>
+                </div>
+                <button type="submit" pButton label="Guardar Host" [disabled]="!formulario.valid"></button>
+            </form>
+        </div>
+    </p-dialog>
+
+    <div class="btn-add-container flex justify-content-around align-items-center w-full">
+        <p-button label="Nuevo Dispositivo" (click)="showDialog()" [rounded]="true" severity="secondary"></p-button>
+        <p-button label="Gestionar Alertas" icon="pi pi-plus" (click)="goToTechnicians()"></p-button>
+    </div>
+    <div *ngIf="hosts; else noHosts" class="w-full h-full justify-content-around align-items-center">
+        <div class="flex justify-content-center align-items-center {{ isPhone ? 'flex-column' : 'flex-row' }} w-full container-hosts">
+            <div *ngFor="let h of hosts" class="host flex justify-content-center align-items-center" [ngClass]="{'alert-host': isOn(h)}">
+                <div class="h-full w-4 flex flex-column justify-content-around align-items-center">
+                    <div class="icon flex flex-column justify-content-center align-items-center" *ngIf="!isOn(h); else iconSpin">
+                        <i class="pi pi-cog" style="font-size: 5rem"></i>
+                        <p>Apagado</p>
+                    </div>
+                    <ng-template class="icon" #iconSpin>
+                        <i class="pi pi-spin pi-cog" style="font-size: 5rem"></i>
+                        <p>Encendido</p>
+                    </ng-template>
+                    
+                    <b *ngIf="!isOn(h)">Ultimo Encendido:</b>
+                    <b *ngIf="isOn(h)">Hora Encendido:</b>
+                    <h3 *ngIf="!isOn(h)">{{ h.logs?.length ? (h.logs[h.logs.length - 1].inicio | date: 'dd/MM/yyyy') : 'N/A' }}</h3>
+                    <h3 *ngIf="isOn(h)">{{ horaEncendido }}</h3>
+
+                </div>
+                <div class="h-full w-8 flex flex-column justify-content-around align-items-center">
+                    <h2>{{h.nombreHost}}</h2>
+                    <h4>{{h.ipHost}}</h4>
+                    <div class="w-7 flex-around">
+                        <p-button icon="pi pi-bookmark" (click)="showDialogEdit(h)" pTooltip="Editar el Host" tooltipPosition="bottom" severity="secondary"></p-button>
+                        <p-button icon="pi pi-search" (click)="viewLog(h.idHost)"  pTooltip="Ver Logs" tooltipPosition="bottom" severity="success"></p-button>
+                        <p-button icon="pi pi-trash"  (click)="deleteHost(h.idHost)" pTooltip="Eliminar el Host" tooltipPosition="bottom" severity="danger"></p-button>
+                    </div>
+                    <b>Uso Total</b>
+                    <h3 *ngIf="getTotalTiempoUso(h) < 60"> {{ getTotalTiempoUso(h) | number: '1.2-2'}} minutos</h3>
+                    <h3 *ngIf="getTotalTiempoUso(h) > 60"> {{ getTotalTiempoUso(h) / 60 | number: '1.2-2'}} Hora/s</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #noHosts>
+        <p-messages [(value)]="messageNoHost" [enableService]="false"></p-messages>
+      </ng-template>
+</div>
+<app-footer></app-footer>

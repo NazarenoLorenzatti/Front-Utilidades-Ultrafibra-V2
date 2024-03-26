@@ -1,0 +1,56 @@
+<!-- MODAL PARA EDITAR O CREAR TECNICO-->
+<p-dialog header="Tecnico" [(visible)]="visible" [modal]="true" [style]="{ width: '400px' }"
+[draggable]="false" [resizable]="false">
+<div class="flex justify-content-center align-items-center">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="input-form">
+            <label for="name">Nombre Tecnico:</label>
+            <input id="name" type="text" aria-describedby="name-help" pInputText
+                formControlName="name" />
+            <small id="name-help">Ingrese el nombre del tecnico.</small>
+        </div>
+        <div class="input-form">
+            <label for="tel">Telefono:</label>
+            <input id="tel" type="text" aria-describedby="tel-help" pInputText
+                formControlName="tel" />
+            <small id="tel-help">Ingrese el Telefono para alertas.</small>
+        </div>
+        <div class="input-form">
+            <label for="email">Email:</label>
+            <input id="email" type="text" aria-describedby="email-help" pInputText
+                formControlName="email" />
+            <small id="email-help">Ingrese el Email para alertas.</small>
+        </div>
+        <button type="submit" pButton label="Guardar" [disabled]="!form.valid"></button>
+    </form>
+</div>
+</p-dialog>
+
+
+<!-- CONFIRM POPUP -->
+<p-toast></p-toast>
+<p-confirmPopup></p-confirmPopup>
+
+<div class="btns flex-center row">
+    <p-button label="Nuevo Tecnico" (click)="showDialog()" icon="pi pi-check"></p-button>
+</div>
+<div class="container flex flex-row justify-content-center align-items-center">
+    <div class="container flex flex-row justify-content-center align-items-center w-full h-full">
+        <p-card class="card-tec flex flex-column justify-content-center align-items-center w-4 h-full" 
+        *ngFor="let t of technicians" header="{{t.nombreTecnico}}" subheader="{{t.telefono}}">
+            <ng-template pTemplate="header">
+                <img alt="Card" src="../assets/imagenes/sin-foto.jpg" />
+            </ng-template>
+            <p>
+                {{t.email}}
+            </p>
+            <ng-template pTemplate="footer">
+                <div class="flex flex-row justify-content-around align-items-center w-full">
+                    <p-button icon="pi pi-pencil"></p-button>
+                    <p-button (click)="confirmDelete($event, t.idTecnico)" icon="pi pi-trash" severity="danger"></p-button>
+                </div>
+            </ng-template>
+        </p-card>
+    </div>
+
+</div>

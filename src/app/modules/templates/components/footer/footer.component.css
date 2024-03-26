@@ -1,6 +1,5 @@
 .section-footer {
   position: relative;
-  background-color: #071426;
   color: white;
 }
 
@@ -14,7 +13,7 @@
   position: absolute;
   width: 60%;
   height: 120px;
-  background-color: #31fb745e;
+  background-color: #5eead5a2;
 }
 
 .uno {

@@ -1,0 +1,36 @@
+<div class="container flex-around column widthComplete heightComplete">
+    <div class="form-container flex-around column widthComplete heightComplete">
+        <form class="form flex-around column" [formGroup]="infoForm" >
+
+            <div class="input-form">
+                <label for="name">Nombre</label>
+                <input pInputText id="name" formControlName="name" required />
+                <small id="name-help">Ingrese su Nombre.</small>
+            </div>
+
+            <div class="input-form">
+                <label for="lastname">Apellido: </label>
+                <input pInputText id="lastname" formControlName="lastname" required />
+                <small id="lastname-help">Ingrese su Apellido.</small>
+            </div>
+
+            <div class="input-form">
+                <label for="email">Email: </label>
+                <input pInputText id="email" formControlName="email" required />
+                <small id="email-help">Ingrese su Email.</small>
+            </div>
+
+            <div class="input-form">
+                <label for="phone">Telefono: </label>
+                <input pInputText id="phone" formControlName="phone" required />
+                <small id="phone-help">Ingrese su Telefono.</small>
+            </div>
+
+            <div class="flex-between row widthComplete">
+                <button pButton pRipple label="Atras" class="p-button-success" (click)="backStep()"></button>
+                <button type="submit" pButton pRipple label="Siguiente" class="p-button-success"
+                    [disabled]="!infoForm.valid" (click)="nextStep()"></button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="container flex justify-content-center align-items-center w-full h-full">
+    <p-toast></p-toast>
+    <p-confirmPopup></p-confirmPopup>
+    <div class="table-container p-2 w-full h-full">
+        <div class="flex justify-content-between align-items-center w-full h-4rem">
+            <p-button icon="pi pi-arrow-left" [rounded]="true" severity="secondary" (click)="back()"></p-button>
+            <p-button icon="pi pi-trash" [rounded]="true" severity="danger" (click)="clearLogs($event)"></p-button>
+        </div>
+
+        <div class="card">
+            <p-table 
+            [paginator]="true"
+            [rows]="5"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="{first} de {last}"
+            [rowsPerPageOptions]="[10, 25, 50]"
+            [value]="logs" [tableStyle]="{'min-width': '30rem'}">
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th>Id Log</th>
+                        <th>Inicio</th>
+                        <th>Apagado</th>
+                        <th>Cant. de Hs</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-log let-columns="columns">
+                    <tr>
+                        <td>{{log.idLog}}</td>
+                        <td>{{log.inicio | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                        <td>{{log.fin | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                        <td>
+                            <p-tag [severity]="getSeverity(log.diferenciaEnHoras)">
+                                <h3 *ngIf="log.diferenciaEnHoras < 60"> {{ log.diferenciaEnHoras | number: '1.2-2'}}
+                                    minutos</h3>
+                                <h3 *ngIf="log.diferenciaEnHoras > 60"> {{ log.diferenciaEnHoras / 60 | number:
+                                    '1.2-2'}} Hora/s</h3>
+                            </p-tag>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <div class="kpis-container flex align-items-center justify-content-around">
+        <div class="kpi flex flex-column justify-content-center align-items-center">
+            <h2> Ultimo Encendido</h2>
+            <div class="horas">
+                <p-chart type="bar" [data]="dataChart" [options]="optionsChart"></p-chart>
+            </div>
+        </div>
+        <div class="kpi flex flex-column justify-content-center align-items-center">
+            <h2> Total En El Mes </h2>
+            <div class="flex flex-row justify-content-center align-items-center">
+                <h5 *ngIf="getTotalTiempoUso(logs) < 60"> {{ getTotalTiempoUso(logs) | number: '1.2-2'}} minutos</h5>
+                    <h5 *ngIf="getTotalTiempoUso(logs) > 60"> {{ getTotalTiempoUso(logs) / 60 | number: '1.2-2'}} Hora/s</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

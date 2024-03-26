@@ -1,0 +1,20 @@
+.form{
+    width: 700px;
+    height: 400px;
+}
+
+.input-form{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+span,
+input {
+    width: 100%;
+}
+
+.row{
+    height: 200px;
+}
+

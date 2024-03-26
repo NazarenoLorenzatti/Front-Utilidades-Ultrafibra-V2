@@ -1,0 +1,23 @@
+<div class="container flex-around column widthComplete heightComplete">
+    <div class="form-container flex-around column widthComplete heightComplete">
+        <form class="form flex-around column" [formGroup]="signUpForm">
+
+            <div class="input-form">
+                <label for="username">Username</label>
+                <input pInputText id="username" formControlName="username" required />
+                <small id="username-help">Ingrese su nombre de usuario.</small>
+            </div>
+        
+            <div class="input-form">
+                <label for="password">Password</label>
+                <input pInputText  id="password" formControlName="password" required />
+                <small id="password-help">Ingrese una contrasenia.</small>
+            </div>
+
+            <div class="flex-end row widthComplete">
+                <button type="submit" pButton pRipple label="Guardar Usuario" class="p-button-success"
+                    [disabled]="!signUpForm.valid" (click)="nextStep()"></button>
+            </div>
+        </form>
+    </div>
+</div>

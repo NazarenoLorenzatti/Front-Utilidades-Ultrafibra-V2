@@ -1,0 +1,18 @@
+<div class="container flex-around column widthComplete heightComplete">
+    <div class="form-container flex-around column widthComplete heightComplete">
+        <ul>
+            <li> <label>Usuario: </label> {{username}} </li>
+            <li> <label>Nombre: </label> {{name}} </li>
+            <li> <label>Apellido: </label> {{lastname}} </li>
+            <li> <label>Email: </label>{{email}} </li>
+            <li> <label>Telefono: </label>{{phone}} </li>
+        </ul>
+
+        <div class="flex-between row widthComplete">
+            <button pButton pRipple label="Atras" class="p-button-success" (click)="backStep()"></button>
+            <button type="submit" pButton pRipple label="Confirmar" class="p-button-success"
+                (click)="confirm()"></button>
+        </div>
+
+    </div>
+</div>

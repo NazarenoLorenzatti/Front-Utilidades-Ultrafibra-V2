@@ -3,20 +3,20 @@
 @include mat.core();
 
 $primary-palette: (
-    50 : #e3e4e7,
-    100 : #b9bbc2,
-    200 : #8b8e9a,
-    300 : #5d6072,
-    400 : #3a3e53,
-    500 : #171c35,
-    600 : #141930,
-    700 : #111428,
-    800 : #0d1122,
-    900 : #070916,
-    A100 : #586aff,
-    A200 : #253dff,
-    A400 : #001bf1,
-    A700 : #0018d7,
+    50 : #e1e2e3,
+    100 : #b4b6ba,
+    200 : #82868c,
+    300 : #4f565e,
+    400 : #2a313c,
+    500 : #040d19,
+    600 : #030b16,
+    700 : #030912,
+    800 : #02070e,
+    900 : #010308,
+    A100 : #4e4eff,
+    A200 : #1b1bff,
+    A400 : #0000e7,
+    A700 : #0000ce,
     contrast: (
         50 : #000000,
         100 : #000000,
@@ -117,5 +117,9 @@ color:(
     ),
 typography: $custom-font,
 ));
+
+mat-sidenav-content, mat-sidenav-container, mat-toolbar-container {
+    background-color: var(--surface-ground); // Color de fondo personalizado
+  }
 
 @include mat.all-component-themes($my-theme);

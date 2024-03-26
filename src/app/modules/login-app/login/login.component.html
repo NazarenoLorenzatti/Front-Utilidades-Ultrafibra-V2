@@ -1,0 +1,40 @@
+<p-toast position="bottom-center" key="bc"></p-toast>
+<div class="container-login flex-center">
+    <div class="form-container flex-center column">
+        <h1>Login</h1>
+        <form class="form flex-around column" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <span class="p-float-label">
+                <input pInputText id="username" formControlName="username" required />
+                <label for="username">Username</label>
+            </span>
+            <span class="p-float-label">
+                <input pInputText id="password" formControlName="password" required />
+                <label for="password">Password</label>
+            </span>
+            <div class="flex-around row widthComplete">
+                <p-button type="submit" label="Login" [raised]="true" severity="success"
+                [disabled]="!loginForm.valid"></p-button>
+            <p-button label="Registrarse" [raised]="true" severity="primary" (click)="goToSignUp()"></p-button>
+            </div>
+        </form>
+        
+    </div>
+</div>
+
+
+<p-dialog class="modal-pin" header="INGRESAR CODIGO" [(visible)]="visible" [modal]="true"
+    [style]="{ width: '300px', height: '250px' }" [closable]="false" [resizable]="false">
+    <div class="container-pin flex-center">
+
+        <form class="form-pin flex-around column" [formGroup]="confirmForm" (ngSubmit)="confirm()">
+
+            <span class="p-float-label">
+                <input pInputText id="pin" formControlName="pin" required />
+                <label for="pin">Codigo de confirmacion</label>
+            </span>
+
+            <p-button type="submit" label="Confirmar" [raised]="true" severity="success"></p-button>
+        </form>
+        
+    </div>
+</p-dialog>

@@ -1,23 +1,21 @@
-<div class="container" [class.is-mobile]="pantallaCelu.matches">
-    <!-- ESTO ES EL NAV BAR -->
-    <mat-toolbar color="primary" class="nav-toolbar">
+<div class="container flex flex-column absolute" [class.is-mobile]="pantallaCelu.matches">
+    <!-- NAV BAR -->
+    <mat-toolbar color="primary" class="flex flex-row justify-content-between nav-toolbar">
         <button mat-icon-button (click)="snav.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
 
         <div class="logo-navbar">
-            <img class="img-logo-navbar" src="./assets/imagenes/logo.png" alt="Logo de la empresa">
+            <img class="w-full h-full" src="./assets/imagenes/logo.png" alt="Logo de la empresa">
         </div>
         
         <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
             <ul fxLayout="row" fxLayoutGap="20px">
                 <li>
-                    <!-- Es para que cuando hago click en el boton de persona me muestra un minimenu con cerrar sesion-->
                     <button mat-button [matMenuTriggerFor]="menu">
-                        <!--[matMenuTriggerFor]="menu" enlaca con lo q sigue-->
                         <mat-icon>person_outline</mat-icon>
                     </button>
-                    <mat-menu #menu="matMenu"> <!-- ENLAZA CON ESTO-->
+                    <mat-menu #menu="matMenu"> 
                         <button mat-menu-item (click)="logout()">
                             <mat-icon>exit_to_app</mat-icon>
                             Cerrar Sesion
@@ -28,28 +26,37 @@
         </div>
     </mat-toolbar>
 
-    <!-- ESTO ES EL SIDENAV-->
+    <!-- SIDENAV-->
     <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="pantallaCelu.matches ? 56 : 0">
         <mat-sidenav #snav [mode]="pantallaCelu.matches ? 'over' : 'side'" fixedTopGap="56" [fixedInViewport]="pantallaCelu.matches">
-         
             <mat-nav-list>
-                <div class="profile-card">
-                    <div class="header">
+                <div class="flex flex-column align-items-center justify-content-center mb-1">
+                    <div class="header flex flex-column align-items-center justify-content-center">
                         <div class="img-container">
-                            <img class="img-perfil" *ngIf="imgPerfil" [src]="imgPerfil" alt="Mi Imagen" />
-                            <img class="img-perfil" *ngIf="!imgPerfil" src="../assets/imagenes/sin-foto.jpg" alt="Mi Imagen" />
+                            <img class="img-perfil w-full h-full" *ngIf="imgPerfil" [src]="imgPerfil" alt="Mi Imagen" />
+                            <img class="img-perfil w-full h-full" *ngIf="!imgPerfil" src="../assets/imagenes/sin-foto.jpg" alt="Mi Imagen" />
                         </div>
                         <h5>{{nombre}} {{apellido}}</h5>
                         <p>{{email}}</p>
                     </div>
                 </div>
                 <mat-divider></mat-divider>
-                <div class="botones">
-                    <button class="btn" mat-button [routerLink]="nav.ruta" *ngFor="let nav of menuNav">
+                <div *ngIf="pantallaCelu.matches" class="flex flex flex-column">
+                    <button class="btn flex justify-content-start w-full" mat-button [routerLink]="nav.ruta" *ngFor="let nav of menuNavMobile">
                         <mat-icon class="icono"> {{nav.icono}}</mat-icon>
                         {{nav.name}}
                     </button>
-                    <button class="btn" mat-button color="warn" (click)="logout()">
+                    <button class="btn flex justify-content-start w-full" mat-button color="warn" (click)="logout()">
+                        <mat-icon class="icono" color="warn"> exit_to_app</mat-icon>
+                        Cerrar Sesion
+                    </button>
+                </div>
+                <div *ngIf="!pantallaCelu.matches" class="botones">
+                    <button class="btn flex justify-content-start w-full" mat-button [routerLink]="nav.ruta" *ngFor="let nav of menuNavPc">
+                        <mat-icon class="icono"> {{nav.icono}}</mat-icon>
+                        {{nav.name}}
+                    </button>
+                    <button class="btn flex justify-content-start w-full" mat-button color="warn" (click)="logout()">
                         <mat-icon class="icono" color="warn"> exit_to_app</mat-icon>
                         Cerrar Sesion
                     </button>

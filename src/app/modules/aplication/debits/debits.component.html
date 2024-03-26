@@ -1,0 +1,117 @@
+<!---------------------- Vista Extractos  ------------------------------>
+<div class="container flex flex-column align-items-center justify-content-center w-full">
+    <div class="tab-btns flex align-items-center justify-content-center w-full">
+        <div class="btns mr-1">
+            <p-button label="Extractos" [raised]="true" (click)="changeTab(true)"></p-button>
+        </div>
+        <div class="btns">
+            <p-button label="Respuesta" [raised]="true" (click)="changeTab(false)" severity="secondary"></p-button>
+        </div>
+    </div>
+    <div class="container-tab flex justify-content-center align-items-center">
+        <div *ngIf="toggleTab1; else tab2" class="tab-1 flex flex-column align-items-center justify-content-center">
+            <div class="input-file">
+                <p-toast></p-toast>
+                <div class="overlay" *ngIf="loading"></div> <!-- Div para oscurecer la pantalla -->
+                <p-progressSpinner *ngIf="loading" class="spinner"></p-progressSpinner> <!-- Spinner de carga -->
+                <p-fileUpload name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php"
+                    (onUpload)="onUpload($event)" [multiple]="true" accept=".xls,.xlsx" [maxFileSize]="1000000">
+                    <ng-template pTemplate="content">
+                        <ul *ngIf="uploadedFiles.length">
+                            <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+                        </ul>
+                    </ng-template>
+                </p-fileUpload>
+            </div>
+            <div class="table flex align-items-center justify-content-center">
+                <div class="card">
+                    <p-table [value]="debitsCells" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+                        [tableStyle]="{ 'min-width': '20rem' }"
+                        currentPageReportTemplate="{first} to {last} of {totalRecords}"
+                        [rows]="5"
+                        [rowsPerPageOptions]="[5]">
+                        <ng-template pTemplate="caption">
+                            <div class="flex flex-row align-items-center justify-content-center w-full">
+                                <p-selectButton class="selectButtons" [options]="abiertosCerrados" [(ngModel)]="valueOpenClose"
+                                    optionLabel="label" optionValue="value"></p-selectButton>
+                                <p-calendar [(ngModel)]="date" [showIcon]="true"  dateFormat="yy/mm/dd" ></p-calendar>
+                                <div class="flex flex-row align-items-center justify-content-center w-6" style="margin-top: 10px;">
+                                    <span class="p-float-label flex flex-row align-items-center justify-content-center w-6">
+                                        <input style="width:100%" pInputText id="namefile" [(ngModel)]="fileName"/>
+                                        <label htmlFor="namefile">Nombre del Archivo!</label>
+                                    </span>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width:25%">CBU</th>
+                                <th style="width:25%">ID CLIENTE</th>
+                                <th style="width:25%">TITULAR CUENTA</th>
+                                <th style="width:25%">TOTAL</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-c>
+                            <tr>
+                                <td>{{ c.cbu }}</td>
+                                <td>{{ c.idCliente }}</td>
+                                <td>{{ c.titularCuenta }}</td>
+                                <td>{{ c.totalAdeudado}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+            <div class="inputs flex flex-column align-items-center justify-content-center w-full">
+                <p-button class="btn-dwn" label="Descargar Extracto" [loading]="loading" (onClick)="dowloadXls()"></p-button>
+            </div>
+        </div>
+
+        <!---------------------- Vista Respuesta  ------------------------------>
+        <ng-template #tab2>
+            <div class="tab-2 flex flex-column align-items-center justify-content-center">
+                <div class="input-file flex align-items-center justify-content-center w-full">
+                    <p-toast></p-toast>
+                    <p-fileUpload name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php"
+                        (onUpload)="onUploadTxt($event)" [multiple]="true" accept=".xls,.xlsx,.lis" [maxFileSize]="1000000">
+                        <ng-template pTemplate="content">
+                            <ul *ngIf="uploadedFiles.length">
+                                <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+                            </ul>
+                        </ng-template>
+                    </p-fileUpload>
+                </div>
+                <div class="table flex align-items-center justify-content-center">
+                    <div class="card">
+                        <p-table [value]="responseCells" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+                            [tableStyle]="{ 'min-width': '20rem' }"
+                            currentPageReportTemplate="{first} to {last} of {totalRecords}"
+                            [rows]="5"
+                            [rowsPerPageOptions]="[5]">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="width:25%">Id Cliente</th>
+                                    <th style="width:25%">Fecha de Pago</th>
+                                    <th style="width:25%">Total Pagado</th>
+                                    <th style="width:25%">Motivo</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-r>
+                                <tr>
+                                    <td>{{ r.idCliente }}</td>
+                                    <td>{{ r.fechaDePago | date: 'yyyy-MM-dd'}}</td>
+                                    <td>{{ r.totalPagado }}</td>
+                                    <td>{{ r.motivo }}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+                <div class="inputs flex flex-column align-items-center justify-content-center w-full">
+                    <p-button class="btn-dwn" label="Descargar Respuesta" [loading]="loading" (click)="dowloadXlsResp()"></p-button>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>
+<app-footer></app-footer>

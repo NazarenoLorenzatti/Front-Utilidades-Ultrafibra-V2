@@ -10,11 +10,8 @@ import { MessageAlert } from '../../templates/models/MessageAlert.model';
 export class WebSocketService {
 
   private stompClient: any;
- // private messageSubjet: BehaviorSubject<MessageAlert[]> = new BehaviorSubject<MessageAlert[]>([])
-
   private snmpNotificationsSubject: Subject<any> = new Subject<any>();
   private pingNotificationsSubject: Subject<any> = new Subject<any>();
-
 
   constructor() {
     this.initConnectionSocket();
@@ -42,11 +39,6 @@ export class WebSocketService {
       console.error('Error during Stomp connection:', error);
     });
   }
-
- /* getMessageSubject() {
-    return this.messageSubjet.asObservable();
-  }*/
-
 
   subscribeToSnmpNotifications(): Observable<any> {
     return this.snmpNotificationsSubject.asObservable();

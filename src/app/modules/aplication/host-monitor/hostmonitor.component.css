@@ -1,8 +1,8 @@
 /* VENTANA MODAL */
-.modal{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+h3{
+    color: #86EFAC;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 input{
@@ -13,12 +13,10 @@ input{
     margin-bottom: 15px;
 }
 
-/* ----------------------------------- */
+/* ------------------------------------------------------------------------------------------ */
 
 .container{
-    padding-top: 30px;
-    width: 100%;
-    height: auto;
+    padding-top: 60px;
     max-height: 720px;
     overflow-y: auto;
 }
@@ -28,58 +26,74 @@ input{
     height: 10%;
 }
 
-.container-cards{
-    padding: 20px;
-    width: 100%;
-    height: 100%;
+.container-hosts{
+    padding: 10px;
+    height: 90%;
+    flex-wrap: wrap;
+    overflow-y: auto;
 }
 
 .noHost{
     width: 300px;
     height: 200px;
-    background-color: aquamarine;
 }
 
-.card{
-    margin: 0px 0px 20px 0px;
-    background-color: white;
-    width: 100%;
-    height: 150px;
+.host {
+    color: #fff; /* Texto en blanco para resaltar sobre el fondo oscuro */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto suave */
+    margin: 0 0 30px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(39, 38, 38, 0.591); /* Borde suave */
+    box-shadow: 0 0 20px 0 rgba(56, 56, 56, 0.5); /* Sombra exterior */
+    background-image: linear-gradient(to bottom, #18181a, #191b1e); /* Gradiente de fondo oscuro a más oscuro */
+    width: 400px;
+    height: 200px;
 }
 
-.card.alert-card{
+.host.alert-host {
     order: -1;
-    background-color: brown;
+    animation: titilante 2.5s infinite; /* Animación para resaltar */
 }
 
-.container{
-    width: 100%;
-    height: 100%;
+@keyframes titilante {
+    0%, 7% {
+        transform: rotateZ(0);
+        border-top: 3px solid red;
+      }
+      15% {
+        transform: rotateZ(-15deg);
+        border-right:  2px solid red;
+      }
+      20% {
+        transform: rotateZ(10deg);
+        border-left:  3px solid red;
+      }
+      25% {
+        transform: rotateZ(-10deg);
+      }
+      30% {
+        transform: rotateZ(6deg);
+        border-left: 3px solid rgb(108, 2, 2);
+      }
+      35% {
+        transform: rotateZ(-4deg);
+        border-top:  3px solid rgb(86, 3, 3);
+      }
+      40%, 100% {
+        transform: rotateZ(0);
+      }
 }
 
-.icon-host{
-    width: 35%;
-    height: 100%;
-}
-
-.data-host{
-    width: 65%;
-    height: 100%;
-}
-
-.buttons{
-    width: 60%;
-}
 
 @media screen and (min-width: 720px) {
 
-    .btns-container{
-        width: 30%;
+    .btns-add-container{
+       margin-top: 30px;
     }
 
     .card{
         margin: 0px 20px 0px 0px;
-        width: 30%;
+        width: 400px;
         height: 200px;
     }
 }

@@ -8,7 +8,7 @@ const base_url = "http://localhost:8080/api/v1"
 })
 export class LoginService {
 
-  constructor(private http: HttpClient) { }
+constructor(private http: HttpClient) { }
 
  postLogin(body: any){
     const endpoint = `${base_url}/login`;

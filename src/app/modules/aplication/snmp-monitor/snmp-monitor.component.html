@@ -1,93 +1,219 @@
-<div class="container">
-
-    <!-- Modal Nuevo Dispositivo -->
-    <p-dialog header="{{titleDialog}}" [(visible)]="visible" [modal]="true" [style]="{ width: '400px' }"
-        [draggable]="false" [resizable]="false">
-        <div class="modal">
-            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-                <div class="input-form">
-                    <label for="ipDispositivo">Ip Dispositivo:</label>
-                    <input id="ipDispositivo" type="text" aria-describedby="ip-help" pInputText
-                        formControlName="ipDispositivo" />
-                    <small id="ip-help">Ingrese la Ip del Dispositivo.</small>
+<div class="newDeviceBtn flex-around widthComplete">    
+    <p-button (click)="showDialog(-1,'','','',null)" icon="pi pi-external-link" label="Nuevo Dispositivo"></p-button>
+</div>
+<p-toast></p-toast>
+<p-confirmPopup></p-confirmPopup>
+<div class="container flex flex-row justify-content-center align-items-center w-full h-full">
+    <div *ngFor="let d of devices" [ngClass]="{'order': isOn(d.host)}">
+        <div class="device flex flex-column justify-content-around align-items-center" [ngClass]="{'gen-on': isOn(d.host)}" *ngIf="getDeviceById(d.idDispositivo) as device; else noDevice">
+            <div class="deviceHeader flex flex-row justify-content-between align-items-center w-full">
+                <div *ngIf="d.host; else generadorEmpty" class="generador flex-around">
+                    <div class="led" [ngClass]="{'led-on': isOn(d.host)}"></div>
+                    <div *ngIf="isOn(d.host)">Generador Encendido</div>
+                    <div *ngIf="!isOn(d.host)">Generador Apagado</div>
                 </div>
-                <div class="input-form">
-                    <label for="nombreDispositivo">Nombre del Dispositivo:</label>
-                    <input id="nombreDispositivo" type="text" aria-describedby="name-help" pInputText
-                        formControlName="nombreDispositivo" />
-                    <small id="name-help">Ingrese el nombre del Dispositivo.</small>
+                <ng-template #generadorEmpty>
+                    <div>Sin Generador Asociado</div>
+                </ng-template>
+                <h1>{{d.nombreDispositivo}}</h1>
+                <div class="btns flex flex-row justify-content-around align-items-center h-full w-2">
+                    <p-button icon="pi pi-file-edit"
+                        (click)="showDialog(d.idDispositivo, d.ipDispositivo, d.nombreDispositivo, d.comunidad, d.host)"
+                         severity="warning"></p-button>
+                    <p-button icon="pi pi-trash" (click)="confirmDelete($event, d.idDispositivo)" 
+                        severity="danger"></p-button>
                 </div>
-                <div class="input-form">
-                    <label for="comunidad">Comunidad:</label>
-                    <input id="comunidad" type="text" aria-describedby="community-help" pInputText
-                        formControlName="comunidad" />
-                    <small id="community-help">Ingrese la comunidad SNMP.</small>
-                </div>
-                <button type="submit" pButton label="Guardar" [disabled]="!formulario.valid"></button>
-            </form>
-        </div>
-    </p-dialog>
-
-    <!-- VISTA  -->
-    <div class="btns-container">
-        <p-button label="Nuevo Dispositivo" icon="pi pi-plus" (click)="showDialog('Nuevo Dispositivo')"></p-button>
-        <p-button label="Gestionar Alertas" icon="pi pi-plus" (click)="goToTechnicians()"></p-button>
-    </div>
-    <div class="devices">
-        <div class="btns-layout">
-            <div class="btns">
-                <p-selectButton [options]="stateOptions" [(ngModel)]="value" (onChange)="changeLayout()" optionLabel="icon" optionValue="value">
-                    <ng-template let-item pTemplate>
-                        <i [class]="item.icon"></i>
+            </div>
+            <section class="kpis flex flex-row justify-content-around align-items-center w-full h-6rem">
+                <div class="status">
+                    <div class="on flex flex-row justify-content-center align-items-center w-full h-full" *ngIf="device.snmpMessages; else off">
+                        <h3>OnLine</h3>
+                    </div>
+                    <ng-template #off>
+                        <div class="off flex-row justify-content-center align-items-center w-full h-full">
+                            <h3>Offline</h3>
+                        </div>
                     </ng-template>
-                </p-selectButton>
-            </div>              
-        </div>
+                </div>
+                <div class="inputs flex flex-column justify-content-around align-items-center">
+                    <h4 *ngIf="device.snmpMessages.input1 !== 0 
+                    || device.snmpMessages.input2 !== 0
+                    || device.snmpMessages.input3 !== 0; else badInputs">Entradas Normales</h4>
+                    <ng-template #badInputs>
+                        <h4 style="color: red;">Fallo en INPUT</h4>
+                    </ng-template>
+                    <div class="flex flex-row justify-content-around align-items-center w-full h-6rem">
+                        <div class="input flex flex-column justify-content-around align-items-center">
+                            <b>E 1</b>
+                            <p [ngClass]="{ 'no-energy': isNA(device.snmpMessages.input1) }">
+                                {{ device.snmpMessages.input1 || 'N/A' }} V
+                            </p>
+                        </div>
+                        <div class="input flex flex-column justify-content-around align-items-center">
+                            <b>E 2</b>
+                            <p [ngClass]="{ 'no-energy': isNA(device.snmpMessages.input2) }">
+                                {{ device.snmpMessages.input2 || 'N/A' }} V
+                            </p>
+                        </div>
+                        <div class="input flex flex-column justify-content-around align-items-center">
+                            <b>E 3</b>
+                            <p [ngClass]="{ 'no-energy': isNA(device.snmpMessages.input3) }">
+                                {{ device.snmpMessages.input3 || 'N/A' }} V
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-        <!-- Vista de dispositivos en Lista-->
-        <div *ngIf="layout == 'list'" class="layout-list">
-            <div *ngFor="let d of devices" class="row" [ngClass]="{'alert-row': isAlertRow(d)}">
-                <div class="img-container">
-                    <img src="../assets/imagenes/ups.jpg"/>
+                <!--BYPASS-->
+                <div class="bypases flex flex-column justify-content-around align-items-center">
+                    <h4>ByPass</h4>
+                    <div class="flex flex-row justify-content-around align-items-center h-6rem w-full">
+                        <div class="bypas flex flex-column justify-content-around align-items-center">
+                            <b>B 1</b>
+                            <p [ngClass]="{ 'no-energy': isNA(device.snmpMessages.bypass1) }">
+                                {{ device.snmpMessages.input1 || 'N/A' }} V
+                            </p>
+                        </div>
+                        <div class="bypas flex flex-column justify-content-around align-items-center">
+                            <b>B 2</b>
+                            <p [ngClass]="{ 'no-energy': isNA(device.snmpMessages.bypass2) }">
+                                {{ device.snmpMessages.input2 || 'N/A' }} V
+                            </p>
+                        </div>
+                        <div class="bypas flex flex-column justify-content-around align-items-center">
+                            <b>B 3</b>
+                            <p [ngClass]="{ 'no-energy': isNA(device.snmpMessages.bypass3) }">
+                                {{ device.snmpMessages.input3 || 'N/A' }} V
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="info-container">
-                    <h2>{{d.nombreDispositivo}}</h2>
-                    <b>{{d.ipDispositivo}}</b>
-                    <p>{{d.comunidad ? d.comunidad : 'N/A'}}</p>
+
+                <div class="outputs flex flex-column justify-content-around align-items-center">
+                    <h4>{{device.snmpMessages.outputStatus}}</h4>
+                    <div class="flex flex-row justify-content-around align-items-center w-full h-6rem">
+                        <div class="output flex flex-column justify-content-around align-items-center">
+                            <b>S 1</b>
+                            <p [ngClass]="{ 'no-energy': isNA(device.snmpMessages.output1) }">
+                                {{device.snmpMessages.output1 || 'N/A' }} V
+                            </p>
+                        </div>
+                        <div class="output flex flex-column justify-content-around align-items-center">
+                            <b>S 2</b>
+                            <p [ngClass]="{ 'no-energy': isNA(device.snmpMessages.output2) }">
+                                {{ device.snmpMessages.output2 || 'N/A' }} V
+                            </p>
+                        </div>
+                        <div class="output flex flex-column justify-content-around align-items-center">
+                            <b>S 3</b>
+                            <p [ngClass]="{ 'no-energy': isNA(device.snmpMessages.output3) }">
+                                {{ device.snmpMessages.output3 || 'N/A' }} V
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div *ngIf="isAlertRow(d)" class="alert">
-                    <p-messages [(value)]="alert" [enableService]="false"></p-messages>
+                <div class="temp">
+                    <div class="Ok flex flex-row justify-content-center align-items-center w-full h-full" *ngIf="device.snmpMessages.temp < 50; else nOk">
+                        <h2>{{device.snmpMessages.temp}} °C</h2>
+                    </div>
+                    <ng-template #nOk>
+                        <div class="nOk flex flex-row justify-content-center align-items-center w-full h-full">
+                            <h2>{{device.snmpMessages.temp}}</h2>
+                        </div>
+                    </ng-template>
                 </div>
-                <div class="actions-container">
-                   <div class="actions">
-                    <p-button icon="pi pi-file-edit" [rounded]="true" severity="info" pTooltip="Editar el dispositivo" tooltipPosition="bottom" (click)="showUpdateDialog(d.ipDispositivo,d.nombreDispositivo,d.comunidad)"></p-button>
-                    <p-button icon="pi pi-eject" [rounded]="true" severity="warn" pTooltip="Gestion SNMP" tooltipPosition="bottom" (click)="snmpManagment(d.idDispositivo)"></p-button>
-                    <p-button icon="pi pi-trash" [rounded]="true" severity="warn" pTooltip="Eliminar el Dispositivo" tooltipPosition="bottom" (click)="deleteDevice(d.idDispositivo)"></p-button>
-                   </div>
+            </section>
+            <div class="flex flex-row justify-content-center align-items-center h-full w-full">
+                <div class="info flex flex-column justify-content-center align-items-center h-full w-full h-full">
+                    <section class="flex flex-row justify-content-around align-items-center w-full h-full">
+                        <div class="battery flex flex-column justify-content-around align-items-center">
+                            <div class="flex flex-column justify-content-around align-items-center w-full h-6rem" *ngIf="device.snmpMessages">
+                                <h1>{{device.snmpMessages.batteryStatus || 'Valor predeterminado'}}</h1>
+                                Tiempo: {{device.snmpMessages.timeCharge}} Min
+                            </div>
+                            <div class="charge flex flex-row justify-content-around align-items-center">
+                                <div class="card flex justify-content-center">
+                                    <p-knob [(ngModel)]="device.snmpMessages.batteryCharge"
+                                        valueTemplate="{value}%" [readonly]="true" [size]="120" valueColor="#65eb95"
+                                        rangeColor="#010203"></p-knob>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="charts flex flex-column justify-content-around align-items-center w-9">
+                            <div class="flex flex-row justify-content-center align-items-center w-full h-12rem">
+                                <p-chart class="h-full w-full" 
+                                    type="line" [data]="device.dataChartInputs" [options]="optionsChart"></p-chart>
+                            </div>
+                            <div class="flex flex-row justify-content-center align-items-center w-full">
+                                <p-chart class="h-full w-full" 
+                                    type="line" [data]="device.dataChartBypass" [options]="optionsChart"></p-chart>
+                            </div>
+                        </div>
+                    </section>
                 </div>
+                <section class="logs flex flex-row justify-content-start align-items-start h-full">
+                    <div class="table">
+                        <div class="card">
+                            <p-table [value]="d.eventos"
+                                [tableStyle]="{ 'min-width': '100%' ,  'min-height': '100%', 'font-size': '16px'}"
+                                styleClass="p-datatable-striped" [paginator]="true" [rows]="10" p-datatable-sm>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>LOG</th>
+                                        <th>Fecha</th>
+                                        <th>Proridad</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-event>
+                                    <tr>
+                                        <td style="padding: 8px;">{{ event.idEvento }}</td>
+                                        <td style="padding: 8px;">{{ event.logEvento }}</td>
+                                        <td style="padding: 8px;">{{ event.fechaEvento | date: 'yyyy-MM-dd HH:mm:ss'}}
+                                        </td>
+                                        <td style="padding: 8px;">{{ event.prioridad }}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
-
-        <!-- Vista de dispositivos en Grilla-->
-        <div *ngIf="layout == 'grid'" class="layout-grid">
-            <div *ngFor="let d of devices" class="grid">
-                <div class="comunidad-grid">
-                    <p>{{d.comunidad}}</p>
-                </div>
-                <div class="title-grid">
-                    <div class="img-grid">
-                        <img src="../assets/imagenes/ups.jpg"/>
-                    </div>                    
-                    <h2>{{d.nombreDispositivo}}</h2>
-                    <b>{{d.ipDispositivo}}</b>
-                </div>
-                <div class="actions-grid">
-                    <p-button icon="pi pi-file-edit" [rounded]="true" severity="info" pTooltip="Editar el dispositivo" tooltipPosition="bottom" (click)="showUpdateDialog(d.ipDispositivo,d.nombreDispositivo,d.comunidad)"></p-button>
-                    <p-button icon="pi pi-eject" [rounded]="true" severity="warn" pTooltip="Gestion SNMP" tooltipPosition="bottom" (click)="snmpManagment(d.idDispositivo)"></p-button>
-                    <p-button icon="pi pi-trash" [rounded]="true" severity="warn" pTooltip="Eliminar el Dispositivo" tooltipPosition="bottom" (click)="deleteDevice(d.idDispositivo)"></p-button>
-                </div>
-            </div>
-        </div>
+        <ng-template #noDevice>
+            <div class="noDevice flex flex-column justify-content-center align-items-center w-full">
+                <h3>Cargando Dispositivo...</h3>
+                <p-progressSpinner aria-label="Loading" styleClass="w-4rem h-4rem" strokeWidth="8"
+                fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+            </div>          
+        </ng-template>
     </div>
 </div>
 <app-footer></app-footer>
+
+<p-dialog [ngClass]="{'noModal': !visible}" class="modal flex-around column widthComplete heightComplete" header="Dispositivo SNMP"
+        [(visible)]="visible" [modal]="true" [style]="{ width: '400px', height: '450px'}" [draggable]="false"
+        [resizable]="true">
+        <form class="flex flex-column justify-content-around align-items-center w-full h-full" (ngSubmit)="onSubmit()">
+            <div class="p-field flex flex-column justify-content-around align-items-center w-9">
+                <label for="deviceName">Nombre del Dispositivo</label>
+                <input class="w-full" id="deviceName" type="text" class="p-inputtext" [(ngModel)]="deviceName"
+                    name="deviceName" required>
+            </div>
+            <div class="p-field flex flex-column justify-content-around align-items-center w-9">
+                <label for="deviceIp">IP del Dispositivo</label>
+                <input id="deviceIp" type="text" class="p-inputtext" [(ngModel)]="deviceIp" name="deviceIp" required>
+            </div>
+            <div class="p-field flex flex-column justify-content-around align-items-center w-9">
+                <label for="deviceCommunity">Comunidad del Dispositivo</label>
+                <input id="deviceCommunity" type="text" class="p-inputtext" [(ngModel)]="deviceCommunity"
+                    name="deviceCommunity" required>
+            </div>
+            <div class="p-field flex flex-column justify-content-around align-items-center w-9">
+                <label for="deviceType">Tipo de Dispositivo</label>
+                <p-dropdown class="dropdown" [options]="hosts" [(ngModel)]="selectedHost" optionLabel="nombreHost" optionValue="idHost"
+                    name="deviceType"></p-dropdown>
+            </div>
+            <button type="submit" class="p-button p-button-success">Guardar</button>
+        </form>
+    </p-dialog>

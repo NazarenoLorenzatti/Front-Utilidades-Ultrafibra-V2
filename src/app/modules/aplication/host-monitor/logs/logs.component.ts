@@ -5,6 +5,7 @@ import { LogModel } from 'src/app/modules/templates/models/log.model';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DatePipe } from '@angular/common';
+import { min } from 'rxjs';
 
 interface Column {
   field: string;
@@ -202,7 +203,7 @@ export class LogsComponent implements OnInit {
     const startIndex = Math.max(0, totalLogs - maxLogsToShow);    
     // Recorrer los logs desde el índice inicial hasta el final
     for (let i = startIndex; i < totalLogs; i++) {
-      const formattedDate = this.datePipe.transform(this.logs[i].inicio, 'dd/MM/yyyy');
+      const formattedDate = this.datePipe.transform(this.logs[i].inicio, 'dd/MM-HH:mm');
       labelsChart.push(formattedDate);
       datasChart.push(this.logs[i].diferenciaEnHoras);
     }
@@ -211,7 +212,7 @@ export class LogsComponent implements OnInit {
       labels: labelsChart,
       datasets: [
         {
-          label: labelsChart,
+          label: 'Cant. Encendido en Min',
           fill: true,
           data:  datasChart,
           backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'],

@@ -7,7 +7,6 @@ import { DebitsComponent } from './debits/debits.component';
 import { HostMonitorComponent } from './host-monitor/hostmonitor.component';
 import { SnmpMonitorComponent } from './snmp-monitor/snmp-monitor.component';
 import { LogsComponent } from './host-monitor/logs/logs.component';
-import { DeviceComponent } from './snmp-monitor/components/device/device.component';
 import { ProfileComponent } from './profile/profile.component';
 import { TechniciansComponent } from './technicians/technicians.component';
 import { AuthGuard } from 'src/app/AuthGuard';
@@ -53,12 +52,6 @@ const rutas: Routes = [
     {
         path: 'log',
         component: LogsComponent,
-        loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule),
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'gestion-snmp',
-        component: DeviceComponent,
         loadChildren: () => import('./router-child.module').then(m => m.RouterChildModule),
         canActivate: [AuthGuard]
     },

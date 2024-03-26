@@ -1,6 +1,4 @@
 .container{
-    width: 98%;
-    height: 100%;
     flex-wrap: wrap;
     overflow-y: auto;
 }
@@ -15,19 +13,9 @@
     margin-right: 20px;
 }
 
-.footer{
-    width: 100%;
-}
-
 img{
     border-radius: 10px;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-}
-
-.modal{
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 input{

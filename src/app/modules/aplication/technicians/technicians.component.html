@@ -1,7 +1,7 @@
 <!-- MODAL PARA EDITAR O CREAR TECNICO-->
 <p-dialog header="Tecnico" [(visible)]="visible" [modal]="true" [style]="{ width: '400px' }"
 [draggable]="false" [resizable]="false">
-<div class="modal">
+<div class="flex justify-content-center align-items-center">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="input-form">
             <label for="name">Nombre Tecnico:</label>
@@ -34,19 +34,21 @@
 <div class="btns flex-center row">
     <p-button label="Nuevo Tecnico" (click)="showDialog()" icon="pi pi-check"></p-button>
 </div>
-<div class="container flex-center column">
-    <div class="container flex-center">
-        <p-card class="card-tec flex-center column" *ngFor="let t of technicians" header="{{t.nombreTecnico}}"
-            subheader="{{t.telefono}}">
+<div class="container flex flex-row justify-content-center align-items-center">
+    <div class="container flex flex-row justify-content-center align-items-center w-full h-full">
+        <p-card class="card-tec flex flex-column justify-content-center align-items-center w-4 h-full" 
+        *ngFor="let t of technicians" header="{{t.nombreTecnico}}" subheader="{{t.telefono}}">
             <ng-template pTemplate="header">
                 <img alt="Card" src="../assets/imagenes/sin-foto.jpg" />
             </ng-template>
             <p>
                 {{t.email}}
             </p>
-            <ng-template class="footer flex-around row" pTemplate="footer">
-                <p-button icon="pi pi-pencil"></p-button>
-                <p-button (click)="confirmDelete($event, t.idTecnico)" icon="pi pi-trash" severity="danger"></p-button>
+            <ng-template pTemplate="footer">
+                <div class="flex flex-row justify-content-around align-items-center w-full">
+                    <p-button icon="pi pi-pencil"></p-button>
+                    <p-button (click)="confirmDelete($event, t.idTecnico)" icon="pi pi-trash" severity="danger"></p-button>
+                </div>
             </ng-template>
         </p-card>
     </div>

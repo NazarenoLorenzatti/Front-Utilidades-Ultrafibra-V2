@@ -1,13 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-@import "primeng/resources/themes/lara-light-blue/theme.css";
-@import "src/assets/themes/theme.css";
+/*@import "primeng/resources/themes/lara-light-blue/theme.css";*/
+/*@import "src/assets/themes/theme.css";*/
 @import "primeng/resources/primeng.css";
 @import 'primeicons/primeicons.css';
 
 html, body {height: 100%;}
 body{
     margin: 0;
-    background-color: #071426;
 }
 
 h1, h2, h3, h4, h5, h6, p, b{
@@ -40,6 +39,12 @@ h1,p,h2,h3,h4,h5,h6,b {
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
+}
+
+.flex-start{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .flex-between{

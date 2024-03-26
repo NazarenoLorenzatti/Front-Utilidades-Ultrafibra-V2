@@ -23,6 +23,7 @@ export class DebitsComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
   abiertosCerrados: any[] = [{ label: 'Abierto', value: 'Abierto' }, { label: 'Cerrado', value: 'Cerrado' }];
   private router = inject(Router);
+  
 
   //Servicios
   private debitsService = inject(DebitsService);

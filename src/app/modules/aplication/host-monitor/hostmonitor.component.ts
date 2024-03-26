@@ -37,7 +37,7 @@ export class HostMonitorComponent implements OnInit {
     // Atributos Locales
     public hosts!: any[];
     public options: any;
-
+    public horaEncendido: string = "";
     public messageNoHost!: any[];
 
     constructor() {
@@ -92,7 +92,6 @@ export class HostMonitorComponent implements OnInit {
             next: (data: any) => {
                 if (data.metadata[0].codigo == "00") {
                     this.hosts = data.hostResponse.hosts;
-                    console.log(this.hosts);
                     this.hosts.forEach((host: any) => {
                         this.hostService.newPing(host).subscribe();
                     });
@@ -147,7 +146,13 @@ export class HostMonitorComponent implements OnInit {
 
     // El ping es Correcto?
     isOn(host: any): boolean {
+        if(this.horaEncendido === ''){
+            this.obtenerHoraActual();
+        }        
         const latestMessage = this.messages.find((m) => m.idHost === host.idHost);
+        if(!host && latestMessage?.alcanzable && host.idHost === latestMessage?.idHost){
+            this.horaEncendido = ''
+        }
         return host && latestMessage?.alcanzable && host.idHost === latestMessage?.idHost;
     }
 
@@ -197,7 +202,13 @@ export class HostMonitorComponent implements OnInit {
         this.isPhone = window.innerWidth < 768;
     }
 
+    // Función para actualizar el tiempo encendido
+    obtenerHoraActual() {
+        let ahora = new Date();
+        const horas = ahora.getHours().toString().padStart(2, '0'); // Obtiene las horas y asegura que tenga dos dígitos
+        const minutos = ahora.getMinutes().toString().padStart(2, '0'); // Obtiene los minutos y asegura que tenga dos dígitos
+        const segundos = ahora.getSeconds().toString().padStart(2, '0'); // Obtiene los segundos y asegura que tenga dos dígitos
+        this.horaEncendido = `${horas}:${minutos}:${segundos}`; // Formatea la hora
+    }
+
 }
-
-
-

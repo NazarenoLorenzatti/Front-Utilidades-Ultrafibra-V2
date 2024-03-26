@@ -23,14 +23,15 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { DatePipe } from '@angular/common';
 import { StepsModule } from 'primeng/steps';
-
+import { KnobModule } from 'primeng/knob';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [],
   providers: [
     DatePipe ,
     MessageService,
-    ConfirmationService
+    ConfirmationService,
   ],
   exports: [
     ButtonModule,
@@ -54,7 +55,9 @@ import { StepsModule } from 'primeng/steps';
     DropdownModule,
     ConfirmPopupModule,
     OverlayPanelModule,
-    StepsModule
+    StepsModule,
+    KnobModule,
+    ProgressSpinnerModule
   ],
   imports: [
     ButtonModule,
@@ -79,7 +82,9 @@ import { StepsModule } from 'primeng/steps';
     DropdownModule,
     ConfirmPopupModule,
     OverlayPanelModule,
-    StepsModule
+    StepsModule,
+    KnobModule,
+    ProgressSpinnerModule
   ]
 })
 export class NgPrimeModule { }

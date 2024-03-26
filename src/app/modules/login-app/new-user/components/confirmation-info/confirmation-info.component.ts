@@ -9,8 +9,7 @@ import { RepService } from 'src/app/modules/services/profile/rep/rep.service';
   templateUrl: './confirmation-info.component.html',
   styleUrls: ['./confirmation-info.component.css']
 })
-export class ConfirmationInfoComponent {
- 
+export class ConfirmationInfoComponent implements OnInit{
 
   private profileService = inject(ProfileService);
   private repService = inject(RepService);
@@ -21,13 +20,21 @@ export class ConfirmationInfoComponent {
   public lastname: string | undefined = localStorage.getItem('lastname') || undefined;
   public email: string | undefined = localStorage.getItem('email') || undefined;
   public phone: string | undefined = localStorage.getItem('phone') || undefined;
-  private username: string | undefined = localStorage.getItem('username') || undefined;
+  public username: string | undefined = localStorage.getItem('user') || undefined;
   
+  ngOnInit(): void {
+    console.log(this.name);
+    console.log(this.lastname);
+    console.log(this.email);
+    console.log(this.phone);
+    console.log(this.username);
+  }
+ 
   
   confirm() {
     let bodyUser = {
       username: localStorage.getItem('user'),
-      password: localStorage.getItem('password'),
+      password: localStorage.getItem('pass'),
     }
 
     let bodyRep = {

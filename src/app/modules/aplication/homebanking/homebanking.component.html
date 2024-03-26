@@ -1,11 +1,20 @@
 <div class="container">
-    <div class="container-functions">
-        <div class="container-left">
-            <div class="inpt-file">
-                <div class="div-file">
+    <div class="container-functions w-full flex flex-row">
+        <div class="pl-3 w-4 h-full flex flex-column align-items-center justify-content-center">
+            <div class="m-5 h-15rem w-10 flex align-items-center justify-content-center">
+                <div class="div-file widthComplete heightComplete column flex-around">
                     <p-toast></p-toast>
-                    <p-fileUpload name="demo[]"
-                        (onUpload)="onUpload($event)" url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="true" accept=".xls,.xlsx" [maxFileSize]="1000000">
+                    <div class="overlay" *ngIf="loading"></div> <!-- Div para oscurecer la pantalla -->
+                    <p-progressSpinner *ngIf="loading" class="spinner"></p-progressSpinner> <!-- Spinner de carga -->
+
+                    <p-fileUpload mode="basic" chooseLabel="Subir Respuesta MacroClick" name="demo[]"
+                        url="https://www.primefaces.org/cdn/api/upload.php" accept=".xls,.xlsx" [maxFileSize]="1000000"
+                        (onUpload)="onUploadResponse($event)">
+                    </p-fileUpload>
+
+                    <p-fileUpload chooseLabel="Elegir" uploadLabel="Subir" name="demo[]" (onUpload)="onUpload($event)"
+                        url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="true" accept=".xls,.xlsx"
+                        [maxFileSize]="10000000">
                         <ng-template pTemplate="content">
                             <ul *ngIf="uploadedFiles.length">
                                 <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
@@ -15,23 +24,31 @@
                 </div>
             </div>
         </div>
-        <div class="container-right">
+        <div class="pt-3 h-full w-8 flex align-items-center justify-content-center">
             <div class="card">
-                <p-table p-datatable-sm [value]="banelcoCels" #dt 
-                [paginator]="true"
-                [columns]="cols"
-                styleClass="p-datatable-striped"                 
-                [tableStyle]="{ 'min-width': '50rem' }"
-                [rows]="5"
-                [rowsPerPageOptions]="[5]">                 
+                <p-table p-datatable-sm [value]="banelcoCels" #dt [paginator]="true" [columns]="cols"
+                    styleClass="p-datatable-striped" [tableStyle]="{ 'min-width': '50rem' }" [rows]="5"
+                    [rowsPerPageOptions]="[5]">
                     <ng-template pTemplate="caption">
-                        <div class="header-btns">
-                            <button label="Descargar Archivo!" type="button" pButton pRipple icon="pi pi-file-excel"  class="p-button mr-2" pTooltip="XLS" tooltipPosition="bottom" (click)="donwloadTxt()"></button>
-                            <p-button icon="pi pi-trash" [rounded]="true" [text]="true" [raised]="true" severity="warning" (click)="deleteAllCells()"></p-button>
-                            
+                        <div class="flex flex-row justify-content-around">
+                            <div *ngIf="banelcoCels?.length !== 0; else noFile">
+                                <button *ngIf="banelcoCels[0]?.idCliente" label="Descargar Archivo!" type="button"
+                                    pButton pRipple icon="pi pi-file-excel" class="p-button mr-2" pTooltip="XLS"
+                                    tooltipPosition="bottom" (click)="donwloadTxt()"></button>
+
+                                <button *ngIf="!banelcoCels[0]?.idCliente" label="Descargar Respuesta!" type="button"
+                                    pButton pRipple icon="pi pi-file-excel" class="p-button mr-2" pTooltip="XLS"
+                                    tooltipPosition="bottom" (click)="donwloadXls()"></button>
+
+                                <p-button icon="pi pi-trash" [rounded]="true" [text]="true" [raised]="true"
+                                    severity="warning" (click)="deleteAllCells()"></p-button>
+                            </div>
+                            <ng-template #noFile>
+                                <h4>No se subio ningun archivo</h4>
+                            </ng-template>
                             <div class="card-inpt">
                                 <span class="p-float-label">
-                                    <input style="width:100%" pInputText id="namefile" [(ngModel)]="fileName"/>
+                                    <input style="width:100%" pInputText id="namefile" [(ngModel)]="fileName" />
                                     <label htmlFor="namefile">Nombre del Archivo!</label>
                                 </span>
                             </div>

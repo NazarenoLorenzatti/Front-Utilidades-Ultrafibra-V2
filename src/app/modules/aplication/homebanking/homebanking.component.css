@@ -3,107 +3,39 @@
     padding: 5px 10px; 
     font-size: 12px; 
   } 
-  
-  :host ::ng-deep .p-ripple {
-    background-color: crimson;
-  }
 
-  :host ::ng-deep .p-fileupload-choose {
-    background-color: aliceblue;
-  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+    z-index: 9999; /* Asegura que esté por encima de otros elementos */
+}
+
+.spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 10000; 
+    transform: translate(-50%, -50%);
+}
   
  .container {
     width: 100%;
-    height: 70%;
-    background-color: #071426;
+    height: 120%;
 }
 
 .container-functions {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.container-left {
-    width: 100%;
-    height: 30%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    height: 80%;
 }
 
 .inpt-file{
-    display: flex;
-    height: 80%;
-    width: 85%;
-    background-color: #222222;
     margin: 30px;
-    align-items: center;
-    justify-content: center;
-}
-
-.inpt-text{
-    display: flex;
-    justify-content: center;
-    height: 15%;
-    width: 98%;
-}
-
-.header-btns{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
 }
 
 .card-inpt{
-    width: 40%;
+    width: 60%;
 }
 
-.btns{
-    display: flex;
-    height: 15%;
-    justify-content: center;
-    align-items: center;
-}
-
-.container-right {
-    width: 100%;
-    height: 70%;
-    justify-content: center;
-    align-items: center;
-}
-
-
-@media screen and (min-width: 720px) {
-    .container{
-        height: 120%;
-    }
-
-    .container-functions {
-        width: 100%;
-        height: 80%;
-        flex-direction: row;
-    }
-    
-    .container-left {
-        padding-left: 20px;
-        width: 30%;
-        height: 100%;
-    }
-
-    .inpt-file{
-        height: 50%;
-    }
-
-    .container-right {
-        padding-top: 50px;
-        width: 70%;
-        height: 100%;
-    }
-
-    .card-inpt{
-        width: 60%;
-    }
-}

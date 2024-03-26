@@ -24,11 +24,11 @@ export class PersonalInfoComponent implements OnInit{
   }
 
   nextStep(){
-    this.router.navigate(['/guardar-usuario/confirmar']);
     localStorage.setItem('name', this.infoForm.get('name')?.value);
     localStorage.setItem('lastname', this.infoForm.get('lastname')?.value);
     localStorage.setItem('email', this.infoForm.get('email')?.value);
     localStorage.setItem('phone', this.infoForm.get('phone')?.value);
+    this.router.navigate(['/guardar-usuario/confirmar']);
   }
 
   backStep(){
